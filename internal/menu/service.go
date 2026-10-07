@@ -47,9 +47,7 @@ func NewService(store Store, jwt *security.JWTService) *Service {
 type CreateInput struct {
 	ParentOptionID *int64
 	Title          string
-	Description    *string
 	SortOrder      int
-	Prompts        []PromptInput
 }
 
 type PromptInput struct {
@@ -75,21 +73,14 @@ type ResponseItemInput struct {
 	SortOrder int
 }
 
-func (s *Service) Create(ctx context.Context, staffToken string, input CreateInput) (domain.MenuOption, []domain.MenuOptionPrompt, error) {
+func (s *Service) Create(ctx context.Context, staffToken string, input CreateInput) (domain.MenuOption, error) {
 	if err := s.requireStaff(staffToken); err != nil {
-		return domain.MenuOption{}, nil, err
+		return domain.MenuOption{}, err
 	}
 	if strings.TrimSpace(input.Title) == "" {
-		return domain.MenuOption{}, nil, ErrInvalidInput
+		return domain.MenuOption{}, ErrInvalidInput
 	}
-	prompts := make([]domain.MenuOptionPrompt, 0, len(input.Prompts))
-	for _, prompt := range input.Prompts {
-		if strings.TrimSpace(prompt.Message) == "" || prompt.Weight <= 0 {
-			return domain.MenuOption{}, nil, ErrInvalidInput
-		}
-		prompts = append(prompts, domain.MenuOptionPrompt{Message: strings.TrimSpace(prompt.Message), SortOrder: prompt.SortOrder, Weight: prompt.Weight})
-	}
-	return s.store.CreateMenuOption(ctx, domain.MenuOption{ParentOptionID: input.ParentOptionID, Title: strings.TrimSpace(input.Title), Description: input.Description, SortOrder: input.SortOrder}, prompts)
+	return s.store.CreateMenuOption(ctx, domain.MenuOption{ParentOptionID: input.ParentOptionID, Title: strings.TrimSpace(input.Title), SortOrder: input.SortOrder})
 }
 
 func (s *Service) Deactivate(ctx context.Context, staffToken string, id int64) error {
@@ -100,6 +91,19 @@ func (s *Service) Deactivate(ctx context.Context, staffToken string, id int64) e
 		return ErrInvalidInput
 	}
 	if err := s.store.DeactivateMenuOption(ctx, id); err != nil {
+		return ErrNotFound
+	}
+	return nil
+}
+
+func (s *Service) Delete(ctx context.Context, staffToken string, id int64) error {
+	if err := s.requireStaff(staffToken); err != nil {
+		return err
+	}
+	if id < 1 {
+		return ErrInvalidInput
+	}
+	if err := s.store.DeleteMenuOption(ctx, id); err != nil {
 		return ErrNotFound
 	}
 	return nil
@@ -221,6 +225,43 @@ func (s *Service) ListAllForStaff(ctx context.Context, staffToken string) ([]Sta
 		result = append(result, StaffMenuOptionDetail{MenuOption: option, Prompts: prompts, ResponseGroups: groupDetails})
 	}
 	return result, nil
+}
+
+func (s *Service) GetByIDForStaff(ctx context.Context, staffToken string, id int64) (domain.MenuOption, error) {
+	if err := s.requireStaff(staffToken); err != nil {
+		return domain.MenuOption{}, err
+	}
+	if id < 1 {
+		return domain.MenuOption{}, ErrInvalidInput
+	}
+	option, err := s.store.GetMenuOptionByID(ctx, id)
+	if err != nil {
+		return domain.MenuOption{}, ErrNotFound
+	}
+	return option, nil
+}
+
+func (s *Service) ListByParentForStaff(ctx context.Context, staffToken string, parentOptionID *int64) ([]MenuOptionTreeNode, error) {
+	if err := s.requireStaff(staffToken); err != nil {
+		return nil, err
+	}
+	if parentOptionID != nil && *parentOptionID < 1 {
+		return nil, ErrInvalidInput
+	}
+	return s.store.ListMenuOptionTreeNodesByParent(ctx, parentOptionID)
+}
+
+func (s *Service) ListPromptsForStaff(ctx context.Context, staffToken string, menuOptionID int64) ([]domain.MenuOptionPrompt, error) {
+	if err := s.requireStaff(staffToken); err != nil {
+		return nil, err
+	}
+	if menuOptionID < 1 {
+		return nil, ErrInvalidInput
+	}
+	if _, err := s.store.GetMenuOptionByID(ctx, menuOptionID); err != nil {
+		return nil, ErrNotFound
+	}
+	return s.store.ListAllPrompts(ctx, menuOptionID)
 }
 
 func (s *Service) GetOptionDetail(ctx context.Context, id int64) (OptionDetail, error) {

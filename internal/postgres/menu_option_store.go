@@ -102,36 +102,16 @@ ORDER BY sort_order, id`
 	return items, rows.Err()
 }
 
-func (s *MenuOptionStore) CreateMenuOption(ctx context.Context, option domain.MenuOption, prompts []domain.MenuOptionPrompt) (domain.MenuOption, []domain.MenuOptionPrompt, error) {
-	tx, err := s.pool.Begin(ctx)
-	if err != nil {
-		return domain.MenuOption{}, nil, err
-	}
-	defer tx.Rollback(ctx)
-
+func (s *MenuOptionStore) CreateMenuOption(ctx context.Context, option domain.MenuOption) (domain.MenuOption, error) {
 	const createOption = `INSERT INTO menu_options (parent_option_id, title, description, sort_order)
 VALUES ($1, $2, $3, $4)
 RETURNING id, parent_option_id, title, description, sort_order, is_active, created_at, updated_at`
-	if err := tx.QueryRow(ctx, createOption, option.ParentOptionID, option.Title, option.Description, option.SortOrder).Scan(
+	if err := s.pool.QueryRow(ctx, createOption, option.ParentOptionID, option.Title, nil, option.SortOrder).Scan(
 		&option.ID, &option.ParentOptionID, &option.Title, &option.Description, &option.SortOrder, &option.IsActive, &option.CreatedAt, &option.UpdatedAt,
 	); err != nil {
-		return domain.MenuOption{}, nil, err
+		return domain.MenuOption{}, err
 	}
-
-	const createPrompt = `INSERT INTO menu_option_prompts (menu_option_id, message, sort_order, weight)
-VALUES ($1, $2, $3, $4)
-RETURNING id, menu_option_id, message, sort_order, weight, is_active, created_at, updated_at`
-	for index := range prompts {
-		if err := tx.QueryRow(ctx, createPrompt, option.ID, prompts[index].Message, prompts[index].SortOrder, prompts[index].Weight).Scan(
-			&prompts[index].ID, &prompts[index].MenuOptionID, &prompts[index].Message, &prompts[index].SortOrder, &prompts[index].Weight, &prompts[index].IsActive, &prompts[index].CreatedAt, &prompts[index].UpdatedAt,
-		); err != nil {
-			return domain.MenuOption{}, nil, err
-		}
-	}
-	if err := tx.Commit(ctx); err != nil {
-		return domain.MenuOption{}, nil, err
-	}
-	return option, prompts, nil
+	return option, nil
 }
 
 func (s *MenuOptionStore) DeactivateMenuOption(ctx context.Context, id int64) error {
@@ -230,6 +210,62 @@ func (s *MenuOptionStore) ListAllMenuOptions(ctx context.Context) ([]domain.Menu
 FROM menu_options
 ORDER BY sort_order, id`
 	return scanMenuOptions(s.pool.Query(ctx, query))
+}
+
+func (s *MenuOptionStore) GetMenuOptionByID(ctx context.Context, id int64) (domain.MenuOption, error) {
+	const query = `SELECT id, parent_option_id, title, description, sort_order, is_active, created_at, updated_at
+FROM menu_options
+WHERE id = $1`
+	return scanMenuOption(s.pool.QueryRow(ctx, query, id))
+}
+
+func (s *MenuOptionStore) ListMenuOptionTreeNodesByParent(ctx context.Context, parentOptionID *int64) ([]menu.MenuOptionTreeNode, error) {
+	if parentOptionID == nil {
+		const rootQuery = `SELECT mo.id, mo.parent_option_id, mo.title, mo.description, mo.sort_order, mo.is_active, mo.created_at, mo.updated_at,
+EXISTS (
+    SELECT 1 FROM response_groups rg
+    JOIN response_items ri ON ri.response_group_id = rg.id
+    WHERE rg.menu_option_id = mo.id
+) AS has_response
+FROM menu_options mo
+WHERE mo.parent_option_id IS NULL
+ORDER BY mo.sort_order, mo.id`
+		return scanMenuOptionTreeNodes(s.pool.Query(ctx, rootQuery))
+	}
+
+	const childQuery = `SELECT mo.id, mo.parent_option_id, mo.title, mo.description, mo.sort_order, mo.is_active, mo.created_at, mo.updated_at,
+EXISTS (
+    SELECT 1 FROM response_groups rg
+    JOIN response_items ri ON ri.response_group_id = rg.id
+    WHERE rg.menu_option_id = mo.id
+) AS has_response
+FROM menu_options mo
+WHERE mo.parent_option_id = $1
+ORDER BY mo.sort_order, mo.id`
+	return scanMenuOptionTreeNodes(s.pool.Query(ctx, childQuery, *parentOptionID))
+}
+
+func scanMenuOptionTreeNodes(rows pgx.Rows, err error) ([]menu.MenuOptionTreeNode, error) {
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	nodes := make([]menu.MenuOptionTreeNode, 0)
+	for rows.Next() {
+		var node menu.MenuOptionTreeNode
+		if err := rows.Scan(&node.MenuOption.ID, &node.MenuOption.ParentOptionID, &node.MenuOption.Title, &node.MenuOption.Description, &node.MenuOption.SortOrder, &node.MenuOption.IsActive, &node.MenuOption.CreatedAt, &node.MenuOption.UpdatedAt, &node.HasResponse); err != nil {
+			return nil, err
+		}
+		nodes = append(nodes, node)
+	}
+	return nodes, rows.Err()
+}
+
+func (s *MenuOptionStore) DeleteMenuOption(ctx context.Context, id int64) error {
+	const query = `DELETE FROM menu_options WHERE id = $1 RETURNING id`
+	var deletedID int64
+	return s.pool.QueryRow(ctx, query, id).Scan(&deletedID)
 }
 
 func (s *MenuOptionStore) ListAllPrompts(ctx context.Context, menuOptionID int64) ([]domain.MenuOptionPrompt, error) {

@@ -19,16 +19,12 @@ func NewStaffResponseGroupHandler(service *menu.Service) *StaffResponseGroupHand
 }
 
 func (h *StaffResponseGroupHandler) RegisterRoutes(mux *http.ServeMux) {
-	mux.HandleFunc("POST /api/v1/menu-options/{menuOptionID}/response-groups", h.replace)
+	mux.HandleFunc("POST /api/v1/staff/response-groups", h.replace)
 }
 
 func (h *StaffResponseGroupHandler) replace(w http.ResponseWriter, r *http.Request) {
-	menuOptionID, err := parsePositivePathID(r, "menuOptionID")
-	if err != nil {
-		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "menu option id must be a positive integer"})
-		return
-	}
 	var request struct {
+		MenuOptionID    int64   `json:"menu_option_id"`
 		ResponseGroupID *int64  `json:"response_group_id"`
 		Name            string  `json:"name"`
 		Description     *string `json:"description"`
@@ -49,7 +45,7 @@ func (h *StaffResponseGroupHandler) replace(w http.ResponseWriter, r *http.Reque
 	for _, item := range request.Items {
 		items = append(items, menu.ResponseItemInput{Type: item.Type, Text: item.Text, URL: item.URL, Caption: item.Caption, Metadata: item.Metadata, SortOrder: item.SortOrder})
 	}
-	group, createdItems, err := h.service.ReplaceResponseGroup(r.Context(), bearerToken(r), menuOptionID, menu.ResponseGroupInput{
+	group, createdItems, err := h.service.ReplaceResponseGroup(r.Context(), bearerToken(r), request.MenuOptionID, menu.ResponseGroupInput{
 		ResponseGroupID: request.ResponseGroupID, Name: request.Name, Description: request.Description, SortOrder: request.SortOrder, Items: items,
 	})
 	if !handleMenuAuthorizationError(w, err) {

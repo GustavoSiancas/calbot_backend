@@ -22,9 +22,87 @@ func NewStaffMenuHandler(service *menu.Service) *StaffMenuHandler {
 }
 
 func (h *StaffMenuHandler) RegisterRoutes(mux *http.ServeMux) {
-	mux.HandleFunc("GET /api/v1/menu-options", h.listAll)
-	mux.HandleFunc("POST /api/v1/menu-options", h.create)
-	mux.HandleFunc("PATCH /api/v1/menu-options/{id}/deactivate", h.deactivate)
+	mux.HandleFunc("GET /api/v1/staff/menu-options", h.listAll)
+	mux.HandleFunc("GET /api/v1/staff/menu-options/{id}", h.getByID)
+	mux.HandleFunc("DELETE /api/v1/staff/menu-options/{id}", h.delete)
+	mux.HandleFunc("GET /api/v1/staff/menu-options/tree", h.listByParentQuery)
+	mux.HandleFunc("POST /api/v1/staff/menu-options", h.create)
+	mux.HandleFunc("PATCH /api/v1/staff/menu-options/{id}/deactivate", h.deactivate)
+}
+
+func (h *StaffMenuHandler) delete(w http.ResponseWriter, r *http.Request) {
+	id, err := parsePositivePathID(r, "id")
+	if err != nil {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "menu option id must be a positive integer"})
+		return
+	}
+	err = h.service.Delete(r.Context(), bearerToken(r), id)
+	if !handleMenuAuthorizationError(w, err) {
+		return
+	}
+	if errors.Is(err, menu.ErrNotFound) {
+		writeJSON(w, http.StatusNotFound, map[string]string{"error": "menu option not found"})
+		return
+	}
+	if err != nil {
+		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "unable to delete menu option"})
+		return
+	}
+	w.WriteHeader(http.StatusNoContent)
+}
+
+func (h *StaffMenuHandler) listByParentQuery(w http.ResponseWriter, r *http.Request) {
+	var parentID *int64
+	if value := r.URL.Query().Get("parent_id"); value != "" {
+		parsedID, err := strconv.ParseInt(value, 10, 64)
+		if err != nil || parsedID < 1 {
+			writeJSON(w, http.StatusBadRequest, map[string]string{"error": "parent_id must be a positive integer"})
+			return
+		}
+		parentID = &parsedID
+	}
+	h.listByParent(w, r, parentID)
+}
+
+func (h *StaffMenuHandler) listByParent(w http.ResponseWriter, r *http.Request, parentID *int64) {
+	options, err := h.service.ListByParentForStaff(r.Context(), bearerToken(r), parentID)
+	if !handleMenuAuthorizationError(w, err) {
+		return
+	}
+	if errors.Is(err, menu.ErrInvalidInput) {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "parent id must be a positive integer"})
+		return
+	}
+	if err != nil {
+		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "unable to retrieve menu options"})
+		return
+	}
+	response := make([]staffMenuOptionTreeResponse, 0, len(options))
+	for _, option := range options {
+		response = append(response, staffMenuOptionTreeResponse{staffMenuOptionRowResponse: newStaffMenuOptionRowResponse(option.MenuOption), HasResponse: option.HasResponse})
+	}
+	writeJSON(w, http.StatusOK, response)
+}
+
+func (h *StaffMenuHandler) getByID(w http.ResponseWriter, r *http.Request) {
+	id, err := parsePositivePathID(r, "id")
+	if err != nil {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "menu option id must be a positive integer"})
+		return
+	}
+	option, err := h.service.GetByIDForStaff(r.Context(), bearerToken(r), id)
+	if !handleMenuAuthorizationError(w, err) {
+		return
+	}
+	if errors.Is(err, menu.ErrNotFound) {
+		writeJSON(w, http.StatusNotFound, map[string]string{"error": "menu option not found"})
+		return
+	}
+	if err != nil {
+		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "unable to retrieve menu option"})
+		return
+	}
+	writeJSON(w, http.StatusOK, newStaffMenuOptionRowResponse(option))
 }
 
 func (h *StaffMenuHandler) listAll(w http.ResponseWriter, r *http.Request) {
@@ -58,37 +136,21 @@ func (h *StaffMenuHandler) listAll(w http.ResponseWriter, r *http.Request) {
 
 func (h *StaffMenuHandler) create(w http.ResponseWriter, r *http.Request) {
 	var request struct {
-		ParentOptionID *int64  `json:"parent_option_id"`
-		Title          string  `json:"title"`
-		Description    *string `json:"description"`
-		SortOrder      int     `json:"sort_order"`
-		Prompts        []struct {
-			Message   string `json:"message"`
-			SortOrder int    `json:"sort_order"`
-			Weight    *int   `json:"weight"`
-		} `json:"prompts"`
+		ParentOptionID *int64 `json:"parent_option_id"`
+		Title          string `json:"title"`
+		SortOrder      int    `json:"sort_order"`
 	}
 	if !decodeJSON(w, r, &request) {
 		return
 	}
-	prompts := make([]menu.PromptInput, 0, len(request.Prompts))
-	for _, prompt := range request.Prompts {
-		weight := 1
-		if prompt.Weight != nil {
-			weight = *prompt.Weight
-		}
-		prompts = append(prompts, menu.PromptInput{Message: prompt.Message, SortOrder: prompt.SortOrder, Weight: weight})
-	}
-
-	option, createdPrompts, err := h.service.Create(r.Context(), bearerToken(r), menu.CreateInput{
-		ParentOptionID: request.ParentOptionID, Title: request.Title, Description: request.Description,
-		SortOrder: request.SortOrder, Prompts: prompts,
+	option, err := h.service.Create(r.Context(), bearerToken(r), menu.CreateInput{
+		ParentOptionID: request.ParentOptionID, Title: request.Title, SortOrder: request.SortOrder,
 	})
 	if !handleMenuAuthorizationError(w, err) {
 		return
 	}
 	if errors.Is(err, menu.ErrInvalidInput) {
-		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "title and each prompt message are required; prompt weight must be greater than zero"})
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "title is required"})
 		return
 	}
 	if err != nil {
@@ -96,14 +158,7 @@ func (h *StaffMenuHandler) create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	promptResponses := make([]promptResponse, 0, len(createdPrompts))
-	for _, prompt := range createdPrompts {
-		promptResponses = append(promptResponses, promptResponse{ID: prompt.ID, Message: prompt.Message})
-	}
-	writeJSON(w, http.StatusCreated, struct {
-		menuOptionResponse
-		Prompts []promptResponse `json:"prompts"`
-	}{menuOptionResponse: newMenuOptionResponse(option), Prompts: promptResponses})
+	writeJSON(w, http.StatusCreated, newMenuOptionResponse(option))
 }
 
 func (h *StaffMenuHandler) deactivate(w http.ResponseWriter, r *http.Request) {
@@ -158,6 +213,26 @@ type staffMenuOptionResponse struct {
 	UpdatedAt      time.Time                    `json:"updated_at"`
 	Prompts        []staffPromptResponse        `json:"prompts"`
 	ResponseGroups []staffResponseGroupResponse `json:"response_groups"`
+}
+
+type staffMenuOptionRowResponse struct {
+	ID             int64     `json:"id"`
+	ParentOptionID *int64    `json:"parent_option_id"`
+	Title          string    `json:"title"`
+	Description    *string   `json:"description"`
+	SortOrder      int       `json:"sort_order"`
+	IsActive       bool      `json:"is_active"`
+	CreatedAt      time.Time `json:"created_at"`
+	UpdatedAt      time.Time `json:"updated_at"`
+}
+
+type staffMenuOptionTreeResponse struct {
+	staffMenuOptionRowResponse
+	HasResponse bool `json:"has_response"`
+}
+
+func newStaffMenuOptionRowResponse(option domain.MenuOption) staffMenuOptionRowResponse {
+	return staffMenuOptionRowResponse{ID: option.ID, ParentOptionID: option.ParentOptionID, Title: option.Title, Description: option.Description, SortOrder: option.SortOrder, IsActive: option.IsActive, CreatedAt: option.CreatedAt, UpdatedAt: option.UpdatedAt}
 }
 
 type staffPromptResponse struct {

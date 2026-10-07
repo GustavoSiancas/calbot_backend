@@ -13,7 +13,7 @@ type Store interface {
 	ListActiveChildren(ctx context.Context, parentOptionID int64) ([]domain.MenuOption, error)
 	ListActiveResponseGroups(ctx context.Context, menuOptionID int64) ([]domain.ResponseGroup, error)
 	ListActiveResponseItems(ctx context.Context, responseGroupID int64) ([]domain.ResponseItem, error)
-	CreateMenuOption(ctx context.Context, option domain.MenuOption, prompts []domain.MenuOptionPrompt) (domain.MenuOption, []domain.MenuOptionPrompt, error)
+	CreateMenuOption(ctx context.Context, option domain.MenuOption) (domain.MenuOption, error)
 	DeactivateMenuOption(ctx context.Context, id int64) error
 	CreatePrompt(ctx context.Context, prompt domain.MenuOptionPrompt) (domain.MenuOptionPrompt, error)
 	DeletePrompt(ctx context.Context, id int64) error
@@ -23,4 +23,12 @@ type Store interface {
 	ListAllPrompts(ctx context.Context, menuOptionID int64) ([]domain.MenuOptionPrompt, error)
 	ListAllResponseGroups(ctx context.Context, menuOptionID int64) ([]domain.ResponseGroup, error)
 	ListAllResponseItems(ctx context.Context, responseGroupID int64) ([]domain.ResponseItem, error)
+	GetMenuOptionByID(ctx context.Context, id int64) (domain.MenuOption, error)
+	ListMenuOptionTreeNodesByParent(ctx context.Context, parentOptionID *int64) ([]MenuOptionTreeNode, error)
+	DeleteMenuOption(ctx context.Context, id int64) error
+}
+
+type MenuOptionTreeNode struct {
+	MenuOption  domain.MenuOption
+	HasResponse bool
 }

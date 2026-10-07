@@ -85,9 +85,9 @@ paths:
           description: Missing or invalid bearer token
         '403':
           description: Administrator role required
-  /api/v1/menu-options:
+  /api/v1/staff/menu-options:
     get:
-      tags: [Staff menu]
+      tags: [Staff prompts]
       summary: List every menu option and all associated content, including inactive records
       description: Requires a bearer token belonging to a STAFF account.
       security:
@@ -107,7 +107,7 @@ paths:
           description: Staff role required
     post:
       tags: [Staff menu]
-      summary: Create a menu option with optional prompt variants
+      summary: Create a menu option
       description: Requires a bearer token belonging to a STAFF account.
       security:
         - bearerAuth: []
@@ -119,18 +119,18 @@ paths:
               $ref: '#/components/schemas/CreateMenuOptionRequest'
       responses:
         '201':
-          description: Menu option and its prompts created atomically
+          description: Menu option created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MenuOptionWithPrompts'
+                $ref: '#/components/schemas/MenuOption'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           description: Missing or invalid staff token
         '403':
           description: Staff role required
-  /api/v1/menu-options/{id}/deactivate:
+  /api/v1/staff/menu-options/{id}/deactivate:
     patch:
       tags: [Staff menu]
       summary: Deactivate a menu option without deleting it
@@ -155,25 +155,129 @@ paths:
           description: Staff role required
         '404':
           description: Active menu option not found
-  /api/v1/menu-options/{menuOptionID}/prompts:
-    post:
+  /api/v1/staff/menu-options/{id}:
+    get:
       tags: [Staff menu]
-      summary: Create a prompt variant for a menu option
+      summary: Get one menu option without associated prompts or response content
+      description: Requires a bearer token belonging to a STAFF account. Active and inactive options can be retrieved.
       security:
         - bearerAuth: []
       parameters:
-        - name: menuOptionID
+        - name: id
           in: path
           required: true
           schema:
             type: integer
             format: int64
+      responses:
+        '200':
+          description: Menu option table data only
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StaffMenuOptionRow'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          description: Missing or invalid staff token
+        '403':
+          description: Staff role required
+        '404':
+          description: Menu option not found
+    delete:
+      tags: [Staff menu]
+      summary: Permanently delete a menu option and its dependent content
+      description: Requires a STAFF bearer token. Deletes child menu options, prompts, response groups, and response items through database cascades. Content feedback is retained with its references set to null.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Menu option and its dependent content deleted
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          description: Missing or invalid staff token
+        '403':
+          description: Staff role required
+        '404':
+          description: Menu option not found
+  /api/v1/staff/menu-options/tree:
+    get:
+      tags: [Staff menu]
+      summary: List root menu options for building a tree
+      description: Requires a STAFF bearer token. Without parent_id it returns options whose parent_option_id is null. With parent_id it returns direct children, including active and inactive options.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: parent_id
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        '200':
+          description: Root menu options, without nested relations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StaffMenuOptionTreeRow'
+        '401':
+          description: Missing or invalid staff token
+        '403':
+          description: Staff role required
+  /api/v1/staff/prompts:
+    get:
+      tags: [Staff prompts]
+      summary: List all prompt variants for a menu option
+      description: Requires a STAFF bearer token. Active and inactive prompts are returned.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: menu_option_id
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: All prompts for the menu option
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StaffMenuOptionPrompt'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          description: Missing or invalid staff token
+        '403':
+          description: Staff role required
+        '404':
+          description: Menu option not found
+    post:
+      tags: [Staff prompts]
+      summary: Create a prompt variant for a menu option
+      security:
+        - bearerAuth: []
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateMenuOptionPrompt'
+              $ref: '#/components/schemas/CreatePromptRequest'
       responses:
         '201':
           description: Prompt created
@@ -187,20 +291,13 @@ paths:
           description: Missing or invalid staff token
         '403':
           description: Staff role required
-  /api/v1/menu-options/{menuOptionID}/response-groups:
+  /api/v1/staff/response-groups:
     post:
-      tags: [Staff menu]
+      tags: [Staff response groups]
       summary: Create a response group or replace all items of an existing one
       description: When response_group_id is supplied and belongs to this menu option, all its previous items are deleted and replaced atomically by items in this request. If omitted or not found, a new group is created.
       security:
         - bearerAuth: []
-      parameters:
-        - name: menuOptionID
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
       requestBody:
         required: true
         content:
@@ -222,9 +319,9 @@ paths:
           description: Staff role required
         '409':
           description: Response group belongs to another menu option
-  /api/v1/menu-option-prompts/{id}:
+  /api/v1/staff/prompts/{id}:
     delete:
-      tags: [Staff menu]
+      tags: [Staff prompts]
       summary: Permanently delete a menu option prompt
       security:
         - bearerAuth: []
@@ -239,9 +336,9 @@ paths:
           description: Staff role required
         '404':
           description: Prompt not found
-  /api/v1/menu-option-prompts/{id}/active:
+  /api/v1/staff/prompts/{id}/active:
     patch:
-      tags: [Staff menu]
+      tags: [Staff prompts]
       summary: Set the active state of a menu option prompt
       security:
         - bearerAuth: []
@@ -545,7 +642,7 @@ components:
           format: date-time
     CreateMenuOptionRequest:
       type: object
-      required: [title]
+      required: [parent_option_id, title, sort_order]
       properties:
         parent_option_id:
           type: integer
@@ -553,20 +650,15 @@ components:
           nullable: true
         title:
           type: string
-        description:
-          type: string
-          nullable: true
         sort_order:
           type: integer
-          default: 0
-        prompts:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreateMenuOptionPrompt'
-    CreateMenuOptionPrompt:
+    CreatePromptRequest:
       type: object
-      required: [message]
+      required: [menu_option_id, message]
       properties:
+        menu_option_id:
+          type: integer
+          format: int64
         message:
           type: string
         sort_order:
@@ -578,8 +670,11 @@ components:
           default: 1
     ReplaceResponseGroupRequest:
       type: object
-      required: [name, items]
+      required: [menu_option_id, name, items]
       properties:
+        menu_option_id:
+          type: integer
+          format: int64
         response_group_id:
           type: integer
           format: int64
@@ -622,16 +717,6 @@ components:
         sort_order:
           type: integer
           default: 0
-    MenuOptionWithPrompts:
-      allOf:
-        - $ref: '#/components/schemas/MenuOption'
-        - type: object
-          required: [prompts]
-          properties:
-            prompts:
-              type: array
-              items:
-                $ref: '#/components/schemas/MenuOptionPrompt'
     StaffMenuOption:
       allOf:
         - $ref: '#/components/schemas/MenuOption'
@@ -654,6 +739,29 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/StaffResponseGroup'
+    StaffMenuOptionRow:
+      allOf:
+        - $ref: '#/components/schemas/MenuOption'
+        - type: object
+          required: [is_active, created_at, updated_at]
+          properties:
+            is_active:
+              type: boolean
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+    StaffMenuOptionTreeRow:
+      allOf:
+        - $ref: '#/components/schemas/StaffMenuOptionRow'
+        - type: object
+          required: [has_response]
+          properties:
+            has_response:
+              type: boolean
+              description: True when the option has at least one stored response item, regardless of active state.
     StaffMenuOptionPrompt:
       allOf:
         - $ref: '#/components/schemas/MenuOptionPrompt'
