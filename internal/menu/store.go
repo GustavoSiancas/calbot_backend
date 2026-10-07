@@ -1,0 +1,26 @@
+package menu
+
+import (
+	"context"
+
+	"calbot/internal/domain"
+)
+
+type Store interface {
+	ListActiveRootOptions(ctx context.Context) ([]domain.MenuOption, error)
+	GetActiveOption(ctx context.Context, id int64) (domain.MenuOption, error)
+	GetRandomActivePrompt(ctx context.Context, menuOptionID int64) (*domain.MenuOptionPrompt, error)
+	ListActiveChildren(ctx context.Context, parentOptionID int64) ([]domain.MenuOption, error)
+	ListActiveResponseGroups(ctx context.Context, menuOptionID int64) ([]domain.ResponseGroup, error)
+	ListActiveResponseItems(ctx context.Context, responseGroupID int64) ([]domain.ResponseItem, error)
+	CreateMenuOption(ctx context.Context, option domain.MenuOption, prompts []domain.MenuOptionPrompt) (domain.MenuOption, []domain.MenuOptionPrompt, error)
+	DeactivateMenuOption(ctx context.Context, id int64) error
+	CreatePrompt(ctx context.Context, prompt domain.MenuOptionPrompt) (domain.MenuOptionPrompt, error)
+	DeletePrompt(ctx context.Context, id int64) error
+	SetPromptActive(ctx context.Context, id int64, isActive bool) (domain.MenuOptionPrompt, error)
+	ReplaceResponseGroup(ctx context.Context, menuOptionID int64, responseGroupID *int64, group domain.ResponseGroup, items []domain.ResponseItem) (domain.ResponseGroup, []domain.ResponseItem, error)
+	ListAllMenuOptions(ctx context.Context) ([]domain.MenuOption, error)
+	ListAllPrompts(ctx context.Context, menuOptionID int64) ([]domain.MenuOptionPrompt, error)
+	ListAllResponseGroups(ctx context.Context, menuOptionID int64) ([]domain.ResponseGroup, error)
+	ListAllResponseItems(ctx context.Context, responseGroupID int64) ([]domain.ResponseItem, error)
+}

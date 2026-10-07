@@ -1,0 +1,712 @@
+openapi: 3.0.3
+info:
+  title: CalBot API
+  version: 0.1.0
+  description: API for managing staff authentication and CalBot content.
+servers:
+  - url: http://localhost:8080
+paths:
+  /health:
+    get:
+      summary: Service health check
+      responses:
+        '204':
+          description: Service is available
+  /api/v1/auth/bootstrap-admin:
+    post:
+      tags: [Authentication]
+      summary: Create the one-time initial administrator
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminBootstrapRequest'
+      responses:
+        '201':
+          description: Administrator created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          description: An administrator already exists
+  /api/v1/auth/login:
+    post:
+      tags: [Authentication]
+      summary: Log in a staff or administrator account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Authenticated account and bearer token
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [token, user]
+                properties:
+                  token:
+                    type: string
+                  user:
+                    $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          description: Invalid credentials
+  /api/v1/staff:
+    post:
+      tags: [Staff]
+      summary: Register a staff account
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterStaffRequest'
+      responses:
+        '201':
+          description: Staff account created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          description: Missing or invalid bearer token
+        '403':
+          description: Administrator role required
+  /api/v1/menu-options:
+    get:
+      tags: [Staff menu]
+      summary: List every menu option and all associated content, including inactive records
+      description: Requires a bearer token belonging to a STAFF account.
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: All menu options with their prompts, response groups, and response items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StaffMenuOption'
+        '401':
+          description: Missing or invalid staff token
+        '403':
+          description: Staff role required
+    post:
+      tags: [Staff menu]
+      summary: Create a menu option with optional prompt variants
+      description: Requires a bearer token belonging to a STAFF account.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMenuOptionRequest'
+      responses:
+        '201':
+          description: Menu option and its prompts created atomically
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MenuOptionWithPrompts'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          description: Missing or invalid staff token
+        '403':
+          description: Staff role required
+  /api/v1/menu-options/{id}/deactivate:
+    patch:
+      tags: [Staff menu]
+      summary: Deactivate a menu option without deleting it
+      description: Requires a bearer token belonging to a STAFF account.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Menu option deactivated
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          description: Missing or invalid staff token
+        '403':
+          description: Staff role required
+        '404':
+          description: Active menu option not found
+  /api/v1/menu-options/{menuOptionID}/prompts:
+    post:
+      tags: [Staff menu]
+      summary: Create a prompt variant for a menu option
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: menuOptionID
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMenuOptionPrompt'
+      responses:
+        '201':
+          description: Prompt created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MenuOptionPrompt'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          description: Missing or invalid staff token
+        '403':
+          description: Staff role required
+  /api/v1/menu-options/{menuOptionID}/response-groups:
+    post:
+      tags: [Staff menu]
+      summary: Create a response group or replace all items of an existing one
+      description: When response_group_id is supplied and belongs to this menu option, all its previous items are deleted and replaced atomically by items in this request. If omitted or not found, a new group is created.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: menuOptionID
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReplaceResponseGroupRequest'
+      responses:
+        '201':
+          description: Response group saved and its items replaced
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseGroup'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          description: Missing or invalid staff token
+        '403':
+          description: Staff role required
+        '409':
+          description: Response group belongs to another menu option
+  /api/v1/menu-option-prompts/{id}:
+    delete:
+      tags: [Staff menu]
+      summary: Permanently delete a menu option prompt
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/PromptID'
+      responses:
+        '204':
+          description: Prompt deleted
+        '401':
+          description: Missing or invalid staff token
+        '403':
+          description: Staff role required
+        '404':
+          description: Prompt not found
+  /api/v1/menu-option-prompts/{id}/active:
+    patch:
+      tags: [Staff menu]
+      summary: Set the active state of a menu option prompt
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/PromptID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [is_active]
+              properties:
+                is_active:
+                  type: boolean
+      responses:
+        '200':
+          description: Prompt state updated
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          description: Missing or invalid staff token
+        '403':
+          description: Staff role required
+        '404':
+          description: Prompt not found
+  /public/menu-options:
+    get:
+      tags: [Public menu]
+      summary: List active root menu options
+      responses:
+        '200':
+          description: Active options without a parent, ordered by sort order
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MenuOption'
+  /public/menu-options/{id}:
+    get:
+      tags: [Public menu]
+      summary: Get an active menu option, one random active prompt, and active child options
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: The selected option and its available next options
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MenuOptionDetail'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          description: Active menu option not found
+  /public/menu-options/{id}/responses:
+    get:
+      tags: [Public menu]
+      summary: Get active response groups and active response items for an option
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Active groups and items, each ordered by sort order
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResponseGroup'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          description: Active menu option not found
+  /public/content-feedback:
+    post:
+      tags: [Public feedback]
+      summary: Submit a content report or request for future staff review
+      description: This endpoint only stores feedback. It never changes menu content automatically.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentFeedbackRequest'
+      responses:
+        '201':
+          description: Feedback recorded with PENDING status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentFeedbackCreated'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+components:
+  parameters:
+    PromptID:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int64
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  responses:
+    BadRequest:
+      description: Invalid request data
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    AdminBootstrapRequest:
+      type: object
+      required: [username, password]
+      properties:
+        username:
+          type: string
+          example: admin
+        password:
+          type: string
+          format: password
+    LoginRequest:
+      type: object
+      required: [password]
+      description: "Provide the username for a staff or administrator account."
+      properties:
+        username:
+          type: string
+          example: staff.user
+        password:
+          type: string
+          format: password
+    RegisterStaffRequest:
+      type: object
+      required: [username, password]
+      properties:
+        username:
+          type: string
+          example: staff.user
+        password:
+          type: string
+          format: password
+    User:
+      type: object
+      required: [id, role, created_at]
+      properties:
+        id:
+          type: integer
+          format: int64
+        username:
+          type: string
+          nullable: true
+        role:
+          type: string
+          enum: [STAFF, ADMIN]
+        created_at:
+          type: string
+          format: date-time
+    MenuOption:
+      type: object
+      required: [id, title, sort_order]
+      properties:
+        id:
+          type: integer
+          format: int64
+        parent_option_id:
+          type: integer
+          format: int64
+          nullable: true
+        title:
+          type: string
+        description:
+          type: string
+          nullable: true
+        sort_order:
+          type: integer
+    MenuOptionDetail:
+      allOf:
+        - $ref: '#/components/schemas/MenuOption'
+        - type: object
+          required: [options]
+          properties:
+            prompt:
+              allOf:
+                - $ref: '#/components/schemas/MenuOptionPrompt'
+              nullable: true
+            options:
+              type: array
+              description: Active child options ordered by sort order.
+              items:
+                $ref: '#/components/schemas/MenuOption'
+    MenuOptionPrompt:
+      type: object
+      required: [id, message]
+      properties:
+        id:
+          type: integer
+          format: int64
+        message:
+          type: string
+    ResponseGroup:
+      type: object
+      required: [id, name, sort_order, items]
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        sort_order:
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResponseItem'
+    ResponseItem:
+      type: object
+      required: [id, type, sort_order]
+      properties:
+        id:
+          type: integer
+          format: int64
+        type:
+          type: string
+          enum: [TEXT, LINK, IMAGE, YOUTUBE, VIDEO, DOCUMENT]
+        text:
+          type: string
+          nullable: true
+        url:
+          type: string
+          nullable: true
+        caption:
+          type: string
+          nullable: true
+        metadata:
+          type: object
+          nullable: true
+          additionalProperties: true
+        sort_order:
+          type: integer
+    ContentFeedbackRequest:
+      type: object
+      required: [feedback_type, category, message]
+      properties:
+        menu_option_id:
+          type: integer
+          format: int64
+          nullable: true
+        response_group_id:
+          type: integer
+          format: int64
+          nullable: true
+        feedback_type:
+          type: string
+          enum: [CONTENT_REPORT, CONTENT_REQUEST]
+        category:
+          type: string
+          enum: [INCORRECT, INCOMPLETE, MISSING, UNCLEAR, OUTDATED, OTHER]
+        subject:
+          type: string
+          nullable: true
+        message:
+          type: string
+        suggested_content:
+          type: string
+          nullable: true
+        source_url:
+          type: string
+          nullable: true
+    ContentFeedbackCreated:
+      type: object
+      required: [id, status, created_at]
+      properties:
+        id:
+          type: integer
+          format: int64
+        status:
+          type: string
+          enum: [PENDING]
+        created_at:
+          type: string
+          format: date-time
+    CreateMenuOptionRequest:
+      type: object
+      required: [title]
+      properties:
+        parent_option_id:
+          type: integer
+          format: int64
+          nullable: true
+        title:
+          type: string
+        description:
+          type: string
+          nullable: true
+        sort_order:
+          type: integer
+          default: 0
+        prompts:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateMenuOptionPrompt'
+    CreateMenuOptionPrompt:
+      type: object
+      required: [message]
+      properties:
+        message:
+          type: string
+        sort_order:
+          type: integer
+          default: 0
+        weight:
+          type: integer
+          minimum: 1
+          default: 1
+    ReplaceResponseGroupRequest:
+      type: object
+      required: [name, items]
+      properties:
+        response_group_id:
+          type: integer
+          format: int64
+          nullable: true
+          description: Supply this ID to replace the group's existing items.
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        sort_order:
+          type: integer
+          default: 0
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReplaceResponseItemRequest'
+    ReplaceResponseItemRequest:
+      type: object
+      required: [type]
+      properties:
+        type:
+          type: string
+          enum: [TEXT, LINK, IMAGE, YOUTUBE, VIDEO, DOCUMENT]
+        text:
+          type: string
+          nullable: true
+          description: Required when type is TEXT.
+        url:
+          type: string
+          nullable: true
+          description: Required when type is LINK, IMAGE, YOUTUBE, VIDEO, or DOCUMENT.
+        caption:
+          type: string
+          nullable: true
+        metadata:
+          type: object
+          nullable: true
+          additionalProperties: true
+        sort_order:
+          type: integer
+          default: 0
+    MenuOptionWithPrompts:
+      allOf:
+        - $ref: '#/components/schemas/MenuOption'
+        - type: object
+          required: [prompts]
+          properties:
+            prompts:
+              type: array
+              items:
+                $ref: '#/components/schemas/MenuOptionPrompt'
+    StaffMenuOption:
+      allOf:
+        - $ref: '#/components/schemas/MenuOption'
+        - type: object
+          required: [is_active, created_at, updated_at, prompts, response_groups]
+          properties:
+            is_active:
+              type: boolean
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+            prompts:
+              type: array
+              items:
+                $ref: '#/components/schemas/StaffMenuOptionPrompt'
+            response_groups:
+              type: array
+              items:
+                $ref: '#/components/schemas/StaffResponseGroup'
+    StaffMenuOptionPrompt:
+      allOf:
+        - $ref: '#/components/schemas/MenuOptionPrompt'
+        - type: object
+          required: [sort_order, weight, is_active, created_at, updated_at]
+          properties:
+            sort_order:
+              type: integer
+            weight:
+              type: integer
+            is_active:
+              type: boolean
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+    StaffResponseGroup:
+      allOf:
+        - $ref: '#/components/schemas/ResponseGroup'
+        - type: object
+          required: [is_active, created_at, updated_at]
+          properties:
+            is_active:
+              type: boolean
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+            items:
+              type: array
+              items:
+                $ref: '#/components/schemas/StaffResponseItem'
+    StaffResponseItem:
+      allOf:
+        - $ref: '#/components/schemas/ResponseItem'
+        - type: object
+          required: [is_active, created_at, updated_at]
+          properties:
+            is_active:
+              type: boolean
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+    Error:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string

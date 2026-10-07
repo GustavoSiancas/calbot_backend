@@ -1,0 +1,21 @@
+# Environment and local configuration
+.env
+.env.*
+!.env.example
+
+# Go build artifacts and local caches
+.gocache/
+bin/
+*.exe
+*.test
+*.out
+coverage.out
+
+# Logs
+*.log
+
+# IDE and operating-system files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
