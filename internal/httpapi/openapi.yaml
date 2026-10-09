@@ -189,7 +189,7 @@ paths:
     delete:
       tags: [Staff menu]
       summary: Permanently delete a menu option and its dependent content
-      description: Requires a STAFF bearer token. Deletes child menu options, prompts, response groups, and response items through database cascades. Content feedback is retained with its references set to null.
+      description: Requires a STAFF bearer token. Deletes child menu options, prompts, response groups, and response items through database cascades. Content feedback is independent and is retained.
       security:
         - bearerAuth: []
       parameters:
@@ -240,7 +240,7 @@ paths:
           description: Staff role required
   /api/v1/staff/prompts:
     get:
-      tags: [Staff prompts]
+      tags: [Prompts]
       summary: List all prompt variants for a menu option
       description: Requires a STAFF bearer token. Active and inactive prompts are returned.
       security:
@@ -270,7 +270,7 @@ paths:
         '404':
           description: Menu option not found
     post:
-      tags: [Staff prompts]
+      tags: [Prompts]
       summary: Create a prompt variant for a menu option
       security:
         - bearerAuth: []
@@ -295,7 +295,7 @@ paths:
           description: Staff role required
   /api/v1/staff/response-groups:
     post:
-      tags: [Staff response groups]
+      tags: [Response groups]
       summary: Create a response-group variant for a menu option
       description: A menu option can have multiple response groups. Each group represents an independent response variant and is saved with its items atomically.
       security:
@@ -323,7 +323,7 @@ paths:
           description: The menu option already has child options
   /api/v1/staff/response-groups/by-menu-option/{menuOptionID}:
     get:
-      tags: [Staff response groups]
+      tags: [Response groups]
       summary: List all response groups and response items for a menu option
       description: Requires a STAFF bearer token. Active and inactive groups and items are returned.
       security:
@@ -354,7 +354,7 @@ paths:
           description: Menu option not found
   /api/v1/staff/response-groups/{id}:
     delete:
-      tags: [Staff response groups]
+      tags: [Response groups]
       summary: Permanently delete one response group and its items
       description: Requires a STAFF bearer token. Response items are deleted by cascade. Content feedback is independent and is not affected.
       security:
@@ -379,7 +379,7 @@ paths:
           description: Response group not found
   /api/v1/staff/prompts/{id}:
     delete:
-      tags: [Staff prompts]
+      tags: [Prompts]
       summary: Permanently delete a menu option prompt
       security:
         - bearerAuth: []
@@ -396,7 +396,7 @@ paths:
           description: Prompt not found
   /api/v1/staff/prompts/{id}/active:
     patch:
-      tags: [Staff prompts]
+      tags: [Prompts]
       summary: Set the active state of a menu option prompt
       security:
         - bearerAuth: []
