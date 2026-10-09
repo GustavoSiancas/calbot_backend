@@ -12,6 +12,7 @@ type MenuOption struct {
 	IsActive       bool
 	CreatedAt      time.Time
 	UpdatedAt      time.Time
+	HasPrompts     bool
 
 	Parent         *MenuOption
 	Children       []*MenuOption

@@ -70,6 +70,10 @@ func (h *StaffPromptHandler) create(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "message is required and weight must be greater than zero"})
 		return
 	}
+	if errors.Is(err, menu.ErrMenuOptionHasResponse) {
+		writeJSON(w, http.StatusConflict, map[string]string{"error": "cannot add prompts because this menu option already has response groups"})
+		return
+	}
 	if err != nil {
 		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "unable to create menu option prompt"})
 		return

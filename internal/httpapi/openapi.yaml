@@ -131,7 +131,7 @@ paths:
         '403':
           description: Staff role required
         '409':
-          description: Parent option already has response items and cannot receive children
+          description: Parent option already has response groups and cannot receive children
   /api/v1/staff/menu-options/{id}/deactivate:
     patch:
       tags: [Staff menu]
@@ -213,8 +213,8 @@ paths:
   /api/v1/staff/menu-options/tree:
     get:
       tags: [Staff menu]
-      summary: List root menu options for building a tree
-      description: Requires a STAFF bearer token. Without parent_id it returns options whose parent_option_id is null. With parent_id it returns direct children, including active and inactive options.
+      summary: List menu options for a tree with recursive branch visibility analysis
+      description: Requires a STAFF bearer token. Without parent_id it returns root options; with parent_id it returns direct children. Active and inactive records are included, while isAviable explains whether each complete branch can reach an active final response.
       security:
         - bearerAuth: []
       parameters:
@@ -293,6 +293,8 @@ paths:
           description: Missing or invalid staff token
         '403':
           description: Staff role required
+        '409':
+          description: The menu option already has response groups and cannot receive prompts
   /api/v1/staff/response-groups:
     post:
       tags: [Response groups]
@@ -320,7 +322,7 @@ paths:
         '403':
           description: Staff role required
         '409':
-          description: The menu option already has child options
+          description: The menu option already has child options or prompts
   /api/v1/staff/response-groups/by-menu-option/{menuOptionID}:
     get:
       tags: [Response groups]
@@ -426,7 +428,8 @@ paths:
   /public/menu-options:
     get:
       tags: [Public menu]
-      summary: List active root menu options
+      summary: List visible active root menu options with their next-step availability
+      description: Options that cannot continue to visible children and do not have an active final response are omitted.
       responses:
         '200':
           description: Active options without a parent, ordered by sort order
@@ -435,7 +438,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/MenuOption'
+                  $ref: '#/components/schemas/PublicParentMenuOption'
   /public/menu-options/{id}:
     get:
       tags: [Public menu]
@@ -478,6 +481,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResponseGroup'
                 nullable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          description: Active menu option not found
+  /public/menu-options/{id}/sub-options:
+    get:
+      tags: [Public menu]
+      summary: Get one weighted-random prompt and the active child options
+      description: Selects one active prompt with probability proportional to its weight. Only visible child options are returned; an option that cannot continue is not exposed publicly.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Selected prompt, which can be null, and active direct child options
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicSubOptionsResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -573,7 +599,7 @@ components:
           format: date-time
     MenuOption:
       type: object
-      required: [id, title, sort_order]
+      required: [id, title, sort_order, has_prompt]
       properties:
         id:
           type: integer
@@ -589,6 +615,44 @@ components:
           nullable: true
         sort_order:
           type: integer
+        has_prompt:
+          type: boolean
+          description: True when the option has prompts. Public responses consider only active prompts; STAFF responses include active and inactive prompts.
+    PublicParentMenuOption:
+      type: object
+      required: [id, title, sort_order, is_active, isAviable]
+      properties:
+        id:
+          type: integer
+          format: int64
+        title:
+          type: string
+        sort_order:
+          type: integer
+        is_active:
+          type: boolean
+        isAviable:
+          $ref: '#/components/schemas/PublicParentAvailability'
+    PublicParentAvailability:
+      type: object
+      required: [has_response, has_children]
+      properties:
+        has_response:
+          type: boolean
+        has_children:
+          type: boolean
+    PublicSubOptionsResponse:
+      type: object
+      required: [options]
+      properties:
+        prompt:
+          allOf:
+            - $ref: '#/components/schemas/MenuOptionPrompt'
+          nullable: true
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicParentMenuOption'
     MenuOptionDetail:
       allOf:
         - $ref: '#/components/schemas/MenuOption'
@@ -782,17 +846,52 @@ components:
               type: string
               format: date-time
     StaffMenuOptionTreeRow:
-      allOf:
-        - $ref: '#/components/schemas/StaffMenuOptionRow'
-        - type: object
-          required: [has_response, has_children]
-          properties:
-            has_response:
-              type: boolean
-              description: True when the option has at least one stored response item, regardless of active state.
-            has_children:
-              type: boolean
-              description: True when the option has at least one child menu option, regardless of active state.
+      type: object
+      required: [id, title, sort_order, is_active, created_at, updated_at, isAviable]
+      properties:
+        id:
+          type: integer
+          format: int64
+        parent_option_id:
+          type: integer
+          format: int64
+          nullable: true
+        title:
+          type: string
+        description:
+          type: string
+          nullable: true
+        sort_order:
+          type: integer
+        is_active:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        isAviable:
+          $ref: '#/components/schemas/MenuOptionAvailability'
+    MenuOptionAvailability:
+      type: object
+      required: [has_response, has_children, has_prompt, is_visible, reason]
+      properties:
+        has_response:
+          type: boolean
+          description: True when the option has at least one response group.
+        has_children:
+          type: boolean
+          description: True when the option has at least one child menu option.
+        has_prompt:
+          type: boolean
+          description: True when the option has at least one active prompt.
+        is_visible:
+          type: boolean
+          description: True when the option can reach an active final response through itself or through at least one descendant branch.
+        reason:
+          type: string
+          description: Human-readable explanation, including the causes when descendants prevent the branch from being visible.
     StaffMenuOptionPrompt:
       allOf:
         - $ref: '#/components/schemas/MenuOptionPrompt'

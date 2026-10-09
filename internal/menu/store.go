@@ -26,8 +26,10 @@ type Store interface {
 	GetMenuOptionByID(ctx context.Context, id int64) (domain.MenuOption, error)
 	ListMenuOptionTreeNodesByParent(ctx context.Context, parentOptionID *int64) ([]MenuOptionTreeNode, error)
 	DeleteMenuOption(ctx context.Context, id int64) error
-	HasResponseItems(ctx context.Context, menuOptionID int64) (bool, error)
+	HasResponseGroups(ctx context.Context, menuOptionID int64) (bool, error)
+	HasActiveResponseGroups(ctx context.Context, menuOptionID int64) (bool, error)
 	HasChildren(ctx context.Context, menuOptionID int64) (bool, error)
+	HasPrompts(ctx context.Context, menuOptionID int64, activeOnly bool) (bool, error)
 	DeleteResponseGroup(ctx context.Context, id int64) error
 }
 
@@ -35,4 +37,7 @@ type MenuOptionTreeNode struct {
 	MenuOption  domain.MenuOption
 	HasResponse bool
 	HasChildren bool
+	HasPrompts  bool
+	IsVisible   bool
+	Reason      string
 }

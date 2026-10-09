@@ -115,6 +115,10 @@ func (h *StaffResponseGroupHandler) create(w http.ResponseWriter, r *http.Reques
 		writeJSON(w, http.StatusConflict, map[string]string{"error": "cannot add response items because this menu option already has child options"})
 		return
 	}
+	if errors.Is(err, menu.ErrMenuOptionHasPrompts) {
+		writeJSON(w, http.StatusConflict, map[string]string{"error": "cannot add response groups because this menu option already has prompts"})
+		return
+	}
 	if err != nil {
 		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "unable to save response group"})
 		return

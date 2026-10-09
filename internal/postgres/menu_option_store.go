@@ -61,7 +61,12 @@ ORDER BY sort_order, id`
 func (s *MenuOptionStore) GetWeightedRandomActiveResponseGroup(ctx context.Context, menuOptionID int64) (*domain.ResponseGroup, error) {
 	const query = `SELECT id, menu_option_id, name, description, weight, is_active, created_at, updated_at
 FROM response_groups
-WHERE menu_option_id = $1 AND is_active = TRUE
+WHERE menu_option_id = $1
+  AND is_active = TRUE
+  AND EXISTS (
+      SELECT 1 FROM response_items
+      WHERE response_group_id = response_groups.id AND is_active = TRUE
+  )
 ORDER BY -LN(1.0 - RANDOM()) / weight
 LIMIT 1`
 	var group domain.ResponseGroup
@@ -197,10 +202,10 @@ func (s *MenuOptionStore) ListMenuOptionTreeNodesByParent(ctx context.Context, p
 		const rootQuery = `SELECT mo.id, mo.parent_option_id, mo.title, mo.description, mo.sort_order, mo.is_active, mo.created_at, mo.updated_at,
 EXISTS (
     SELECT 1 FROM response_groups rg
-    JOIN response_items ri ON ri.response_group_id = rg.id
     WHERE rg.menu_option_id = mo.id
 ) AS has_response,
-EXISTS (SELECT 1 FROM menu_options child WHERE child.parent_option_id = mo.id) AS has_children
+EXISTS (SELECT 1 FROM menu_options child WHERE child.parent_option_id = mo.id) AS has_children,
+EXISTS (SELECT 1 FROM menu_option_prompts prompt WHERE prompt.menu_option_id = mo.id AND prompt.is_active = TRUE) AS has_prompts
 FROM menu_options mo
 WHERE mo.parent_option_id IS NULL
 ORDER BY mo.sort_order, mo.id`
@@ -210,10 +215,10 @@ ORDER BY mo.sort_order, mo.id`
 	const childQuery = `SELECT mo.id, mo.parent_option_id, mo.title, mo.description, mo.sort_order, mo.is_active, mo.created_at, mo.updated_at,
 EXISTS (
     SELECT 1 FROM response_groups rg
-    JOIN response_items ri ON ri.response_group_id = rg.id
     WHERE rg.menu_option_id = mo.id
  ) AS has_response,
-EXISTS (SELECT 1 FROM menu_options child WHERE child.parent_option_id = mo.id) AS has_children
+EXISTS (SELECT 1 FROM menu_options child WHERE child.parent_option_id = mo.id) AS has_children,
+EXISTS (SELECT 1 FROM menu_option_prompts prompt WHERE prompt.menu_option_id = mo.id AND prompt.is_active = TRUE) AS has_prompts
 FROM menu_options mo
 WHERE mo.parent_option_id = $1
 ORDER BY mo.sort_order, mo.id`
@@ -229,9 +234,10 @@ func scanMenuOptionTreeNodes(rows pgx.Rows, err error) ([]menu.MenuOptionTreeNod
 	nodes := make([]menu.MenuOptionTreeNode, 0)
 	for rows.Next() {
 		var node menu.MenuOptionTreeNode
-		if err := rows.Scan(&node.MenuOption.ID, &node.MenuOption.ParentOptionID, &node.MenuOption.Title, &node.MenuOption.Description, &node.MenuOption.SortOrder, &node.MenuOption.IsActive, &node.MenuOption.CreatedAt, &node.MenuOption.UpdatedAt, &node.HasResponse, &node.HasChildren); err != nil {
+		if err := rows.Scan(&node.MenuOption.ID, &node.MenuOption.ParentOptionID, &node.MenuOption.Title, &node.MenuOption.Description, &node.MenuOption.SortOrder, &node.MenuOption.IsActive, &node.MenuOption.CreatedAt, &node.MenuOption.UpdatedAt, &node.HasResponse, &node.HasChildren, &node.HasPrompts); err != nil {
 			return nil, err
 		}
+		node.MenuOption.HasPrompts = node.HasPrompts
 		nodes = append(nodes, node)
 	}
 	return nodes, rows.Err()
@@ -243,15 +249,18 @@ func (s *MenuOptionStore) DeleteMenuOption(ctx context.Context, id int64) error 
 	return s.pool.QueryRow(ctx, query, id).Scan(&deletedID)
 }
 
-func (s *MenuOptionStore) HasResponseItems(ctx context.Context, menuOptionID int64) (bool, error) {
-	const query = `SELECT EXISTS (
-    SELECT 1 FROM response_groups rg
-    JOIN response_items ri ON ri.response_group_id = rg.id
-    WHERE rg.menu_option_id = $1
-)`
-	var hasResponse bool
-	err := s.pool.QueryRow(ctx, query, menuOptionID).Scan(&hasResponse)
-	return hasResponse, err
+func (s *MenuOptionStore) HasResponseGroups(ctx context.Context, menuOptionID int64) (bool, error) {
+	const query = `SELECT EXISTS (SELECT 1 FROM response_groups WHERE menu_option_id = $1)`
+	var hasResponseGroups bool
+	err := s.pool.QueryRow(ctx, query, menuOptionID).Scan(&hasResponseGroups)
+	return hasResponseGroups, err
+}
+
+func (s *MenuOptionStore) HasActiveResponseGroups(ctx context.Context, menuOptionID int64) (bool, error) {
+	const query = `SELECT EXISTS (SELECT 1 FROM response_groups WHERE menu_option_id = $1 AND is_active = TRUE)`
+	var hasResponseGroups bool
+	err := s.pool.QueryRow(ctx, query, menuOptionID).Scan(&hasResponseGroups)
+	return hasResponseGroups, err
 }
 
 func (s *MenuOptionStore) HasChildren(ctx context.Context, menuOptionID int64) (bool, error) {
@@ -259,6 +268,16 @@ func (s *MenuOptionStore) HasChildren(ctx context.Context, menuOptionID int64) (
 	var hasChildren bool
 	err := s.pool.QueryRow(ctx, query, menuOptionID).Scan(&hasChildren)
 	return hasChildren, err
+}
+
+func (s *MenuOptionStore) HasPrompts(ctx context.Context, menuOptionID int64, activeOnly bool) (bool, error) {
+	query := `SELECT EXISTS (SELECT 1 FROM menu_option_prompts WHERE menu_option_id = $1)`
+	if activeOnly {
+		query = `SELECT EXISTS (SELECT 1 FROM menu_option_prompts WHERE menu_option_id = $1 AND is_active = TRUE)`
+	}
+	var hasPrompts bool
+	err := s.pool.QueryRow(ctx, query, menuOptionID).Scan(&hasPrompts)
+	return hasPrompts, err
 }
 
 func (s *MenuOptionStore) DeleteResponseGroup(ctx context.Context, id int64) error {

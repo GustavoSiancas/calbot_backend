@@ -21,6 +21,7 @@ func NewPublicMenuHandler(service *menu.Service) *PublicMenuHandler {
 func (h *PublicMenuHandler) RegisterRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("GET /public/menu-options", h.listRootOptions)
 	mux.HandleFunc("GET /public/menu-options/{id}", h.getOptionDetail)
+	mux.HandleFunc("GET /public/menu-options/{id}/sub-options", h.getSubOptions)
 	mux.HandleFunc("GET /public/menu-options/{id}/responses", h.getResponses)
 }
 
@@ -58,9 +59,61 @@ func (h *PublicMenuHandler) listRootOptions(w http.ResponseWriter, r *http.Reque
 		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "unable to retrieve menu options"})
 		return
 	}
-	response := make([]menuOptionResponse, 0, len(options))
+	response := make([]publicParentMenuOptionResponse, 0, len(options))
 	for _, option := range options {
-		response = append(response, newMenuOptionResponse(option))
+		response = append(response, newPublicParentMenuOptionResponse(option))
+	}
+	writeJSON(w, http.StatusOK, response)
+}
+
+type publicParentMenuOptionResponse struct {
+	ID        int64                            `json:"id"`
+	Title     string                           `json:"title"`
+	SortOrder int                              `json:"sort_order"`
+	IsActive  bool                             `json:"is_active"`
+	IsAviable publicParentAvailabilityResponse `json:"isAviable"`
+}
+
+type publicParentAvailabilityResponse struct {
+	HasResponse bool `json:"has_response"`
+	HasChildren bool `json:"has_children"`
+}
+
+type publicSubOptionsResponse struct {
+	Prompt  *promptResponse                  `json:"prompt"`
+	Options []publicParentMenuOptionResponse `json:"options"`
+}
+
+func newPublicParentMenuOptionResponse(option menu.ParentOptionDetail) publicParentMenuOptionResponse {
+	return publicParentMenuOptionResponse{
+		ID: option.MenuOption.ID, Title: option.MenuOption.Title, SortOrder: option.MenuOption.SortOrder,
+		IsActive:  option.MenuOption.IsActive,
+		IsAviable: publicParentAvailabilityResponse{HasResponse: option.HasResponse, HasChildren: option.HasChildren},
+	}
+}
+
+func (h *PublicMenuHandler) getSubOptions(w http.ResponseWriter, r *http.Request) {
+	id, err := strconv.ParseInt(r.PathValue("id"), 10, 64)
+	if err != nil || id < 1 {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "menu option id must be a positive integer"})
+		return
+	}
+	detail, err := h.service.GetSubOptions(r.Context(), id)
+	if errors.Is(err, menu.ErrNotFound) {
+		writeJSON(w, http.StatusNotFound, map[string]string{"error": "active menu option not found"})
+		return
+	}
+	if err != nil {
+		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "unable to retrieve sub options"})
+		return
+	}
+	options := make([]publicParentMenuOptionResponse, 0, len(detail.Options))
+	for _, option := range detail.Options {
+		options = append(options, newPublicParentMenuOptionResponse(option))
+	}
+	response := publicSubOptionsResponse{Options: options}
+	if detail.Prompt != nil {
+		response.Prompt = &promptResponse{ID: detail.Prompt.ID, Message: detail.Prompt.Message}
 	}
 	writeJSON(w, http.StatusOK, response)
 }
@@ -102,10 +155,11 @@ type menuOptionResponse struct {
 	Title       string  `json:"title"`
 	Description *string `json:"description"`
 	SortOrder   int     `json:"sort_order"`
+	HasPrompts  bool    `json:"has_prompt"`
 }
 
 func newMenuOptionResponse(option domain.MenuOption) menuOptionResponse {
-	return menuOptionResponse{ID: option.ID, ParentID: option.ParentOptionID, Title: option.Title, Description: option.Description, SortOrder: option.SortOrder}
+	return menuOptionResponse{ID: option.ID, ParentID: option.ParentOptionID, Title: option.Title, Description: option.Description, SortOrder: option.SortOrder, HasPrompts: option.HasPrompts}
 }
 
 type promptResponse struct {

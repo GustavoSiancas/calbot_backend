@@ -79,7 +79,7 @@ func (h *StaffMenuHandler) listByParent(w http.ResponseWriter, r *http.Request, 
 	}
 	response := make([]staffMenuOptionTreeResponse, 0, len(options))
 	for _, option := range options {
-		response = append(response, staffMenuOptionTreeResponse{staffMenuOptionRowResponse: newStaffMenuOptionRowResponse(option.MenuOption), HasResponse: option.HasResponse, HasChildren: option.HasChildren})
+		response = append(response, newStaffMenuOptionTreeResponse(option))
 	}
 	writeJSON(w, http.StatusOK, response)
 }
@@ -129,7 +129,7 @@ func (h *StaffMenuHandler) listAll(w http.ResponseWriter, r *http.Request) {
 			}
 			groups = append(groups, staffResponseGroupResponse{ID: group.ResponseGroup.ID, MenuOptionID: group.ResponseGroup.MenuOptionID, Name: group.ResponseGroup.Name, Description: group.ResponseGroup.Description, Weight: group.ResponseGroup.Weight, IsActive: group.ResponseGroup.IsActive, CreatedAt: group.ResponseGroup.CreatedAt, UpdatedAt: group.ResponseGroup.UpdatedAt, Items: items})
 		}
-		response = append(response, staffMenuOptionResponse{ID: option.MenuOption.ID, ParentOptionID: option.MenuOption.ParentOptionID, Title: option.MenuOption.Title, Description: option.MenuOption.Description, SortOrder: option.MenuOption.SortOrder, IsActive: option.MenuOption.IsActive, CreatedAt: option.MenuOption.CreatedAt, UpdatedAt: option.MenuOption.UpdatedAt, Prompts: prompts, ResponseGroups: groups})
+		response = append(response, staffMenuOptionResponse{ID: option.MenuOption.ID, ParentOptionID: option.MenuOption.ParentOptionID, Title: option.MenuOption.Title, Description: option.MenuOption.Description, SortOrder: option.MenuOption.SortOrder, HasPrompts: option.MenuOption.HasPrompts, IsActive: option.MenuOption.IsActive, CreatedAt: option.MenuOption.CreatedAt, UpdatedAt: option.MenuOption.UpdatedAt, Prompts: prompts, ResponseGroups: groups})
 	}
 	writeJSON(w, http.StatusOK, response)
 }
@@ -212,6 +212,7 @@ type staffMenuOptionResponse struct {
 	Title          string                       `json:"title"`
 	Description    *string                      `json:"description"`
 	SortOrder      int                          `json:"sort_order"`
+	HasPrompts     bool                         `json:"has_prompt"`
 	IsActive       bool                         `json:"is_active"`
 	CreatedAt      time.Time                    `json:"created_at"`
 	UpdatedAt      time.Time                    `json:"updated_at"`
@@ -225,19 +226,50 @@ type staffMenuOptionRowResponse struct {
 	Title          string    `json:"title"`
 	Description    *string   `json:"description"`
 	SortOrder      int       `json:"sort_order"`
+	HasPrompts     bool      `json:"has_prompt"`
 	IsActive       bool      `json:"is_active"`
 	CreatedAt      time.Time `json:"created_at"`
 	UpdatedAt      time.Time `json:"updated_at"`
 }
 
 type staffMenuOptionTreeResponse struct {
-	staffMenuOptionRowResponse
-	HasResponse bool `json:"has_response"`
-	HasChildren bool `json:"has_children"`
+	ID             int64             `json:"id"`
+	ParentOptionID *int64            `json:"parent_option_id"`
+	Title          string            `json:"title"`
+	Description    *string           `json:"description"`
+	SortOrder      int               `json:"sort_order"`
+	IsActive       bool              `json:"is_active"`
+	CreatedAt      time.Time         `json:"created_at"`
+	UpdatedAt      time.Time         `json:"updated_at"`
+	IsAviable      isAviableResponse `json:"isAviable"`
+}
+
+type isAviableResponse struct {
+	HasResponse bool   `json:"has_response"`
+	HasChildren bool   `json:"has_children"`
+	HasPrompt   bool   `json:"has_prompt"`
+	IsVisible   bool   `json:"is_visible"`
+	Reason      string `json:"reason"`
 }
 
 func newStaffMenuOptionRowResponse(option domain.MenuOption) staffMenuOptionRowResponse {
-	return staffMenuOptionRowResponse{ID: option.ID, ParentOptionID: option.ParentOptionID, Title: option.Title, Description: option.Description, SortOrder: option.SortOrder, IsActive: option.IsActive, CreatedAt: option.CreatedAt, UpdatedAt: option.UpdatedAt}
+	return staffMenuOptionRowResponse{ID: option.ID, ParentOptionID: option.ParentOptionID, Title: option.Title, Description: option.Description, SortOrder: option.SortOrder, HasPrompts: option.HasPrompts, IsActive: option.IsActive, CreatedAt: option.CreatedAt, UpdatedAt: option.UpdatedAt}
+}
+
+func newStaffMenuOptionTreeResponse(node menu.MenuOptionTreeNode) staffMenuOptionTreeResponse {
+	availability := isAviableResponse{
+		HasResponse: node.HasResponse,
+		HasChildren: node.HasChildren,
+		HasPrompt:   node.HasPrompts,
+		IsVisible:   node.IsVisible,
+		Reason:      node.Reason,
+	}
+	option := node.MenuOption
+	return staffMenuOptionTreeResponse{
+		ID: option.ID, ParentOptionID: option.ParentOptionID, Title: option.Title, Description: option.Description,
+		SortOrder: option.SortOrder, IsActive: option.IsActive, CreatedAt: option.CreatedAt, UpdatedAt: option.UpdatedAt,
+		IsAviable: availability,
+	}
 }
 
 type staffPromptResponse struct {

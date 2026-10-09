@@ -4,4 +4,7 @@ DROP TABLE IF EXISTS response_groups;
 DROP TABLE IF EXISTS menu_option_prompts;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS menu_options;
+DROP FUNCTION IF EXISTS enforce_child_without_parent_response_groups();
+DROP FUNCTION IF EXISTS enforce_response_group_without_prompts_or_children();
+DROP FUNCTION IF EXISTS enforce_prompt_without_response_groups();
 DROP FUNCTION IF EXISTS set_updated_at();
