@@ -67,7 +67,7 @@ func main() {
 	})
 
 	address := envOrDefault("HTTP_ADDR", ":8080")
-	server := &http.Server{Addr: address, Handler: mux, ReadHeaderTimeout: 5 * time.Second}
+	server := &http.Server{Addr: address, Handler: httpapi.PublicCORS(mux), ReadHeaderTimeout: 5 * time.Second}
 	log.Printf("API listening on %s", address)
 	if err := server.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
 		log.Fatalf("serve HTTP: %v", err)
