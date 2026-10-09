@@ -4,7 +4,10 @@ info:
   version: 0.1.0
   description: API for managing staff authentication and CalBot content.
 servers:
+  - url: https://calbotbackend-production.up.railway.app
+    description: Production (Railway)
   - url: http://localhost:8080
+    description: Local development
 paths:
   /health:
     get:
