@@ -13,9 +13,8 @@ type MenuOption struct {
 	CreatedAt      time.Time
 	UpdatedAt      time.Time
 
-	Parent          *MenuOption
-	Children        []*MenuOption
-	Prompts         []*MenuOptionPrompt
-	ResponseGroups  []*ResponseGroup
-	ContentFeedback []*ContentFeedback
+	Parent         *MenuOption
+	Children       []*MenuOption
+	Prompts        []*MenuOptionPrompt
+	ResponseGroups []*ResponseGroup
 }

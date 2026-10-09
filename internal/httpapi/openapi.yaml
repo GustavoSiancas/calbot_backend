@@ -87,7 +87,7 @@ paths:
           description: Administrator role required
   /api/v1/staff/menu-options:
     get:
-      tags: [Staff prompts]
+      tags: [Staff menu]
       summary: List every menu option and all associated content, including inactive records
       description: Requires a bearer token belonging to a STAFF account.
       security:
@@ -130,6 +130,8 @@ paths:
           description: Missing or invalid staff token
         '403':
           description: Staff role required
+        '409':
+          description: Parent option already has response items and cannot receive children
   /api/v1/staff/menu-options/{id}/deactivate:
     patch:
       tags: [Staff menu]
@@ -294,8 +296,8 @@ paths:
   /api/v1/staff/response-groups:
     post:
       tags: [Staff response groups]
-      summary: Create a response group or replace all items of an existing one
-      description: When response_group_id is supplied and belongs to this menu option, all its previous items are deleted and replaced atomically by items in this request. If omitted or not found, a new group is created.
+      summary: Create a response-group variant for a menu option
+      description: A menu option can have multiple response groups. Each group represents an independent response variant and is saved with its items atomically.
       security:
         - bearerAuth: []
       requestBody:
@@ -303,10 +305,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ReplaceResponseGroupRequest'
+              $ref: '#/components/schemas/CreateResponseGroupRequest'
       responses:
         '201':
-          description: Response group saved and its items replaced
+          description: Response group created with its items
           content:
             application/json:
               schema:
@@ -318,7 +320,63 @@ paths:
         '403':
           description: Staff role required
         '409':
-          description: Response group belongs to another menu option
+          description: The menu option already has child options
+  /api/v1/staff/response-groups/by-menu-option/{menuOptionID}:
+    get:
+      tags: [Staff response groups]
+      summary: List all response groups and response items for a menu option
+      description: Requires a STAFF bearer token. Active and inactive groups and items are returned.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: menuOptionID
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: All response groups and items for the menu option
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StaffResponseGroup'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          description: Missing or invalid staff token
+        '403':
+          description: Staff role required
+        '404':
+          description: Menu option not found
+  /api/v1/staff/response-groups/{id}:
+    delete:
+      tags: [Staff response groups]
+      summary: Permanently delete one response group and its items
+      description: Requires a STAFF bearer token. Response items are deleted by cascade. Content feedback is independent and is not affected.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Response group and its items deleted
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          description: Missing or invalid staff token
+        '403':
+          description: Staff role required
+        '404':
+          description: Response group not found
   /api/v1/staff/prompts/{id}:
     delete:
       tags: [Staff prompts]
@@ -381,7 +439,7 @@ paths:
   /public/menu-options/{id}:
     get:
       tags: [Public menu]
-      summary: Get an active menu option, one random active prompt, and active child options
+      summary: Get an active menu option, one weighted-random active prompt, and active child options
       parameters:
         - name: id
           in: path
@@ -403,7 +461,8 @@ paths:
   /public/menu-options/{id}/responses:
     get:
       tags: [Public menu]
-      summary: Get active response groups and active response items for an option
+      summary: Get one weighted-random active response group and its active response items
+      description: Each active response group is selected with probability proportional to its weight. The response items inside the selected group remain ordered by sort_order. Returns null when the option has no active response group.
       parameters:
         - name: id
           in: path
@@ -413,13 +472,12 @@ paths:
             format: int64
       responses:
         '200':
-          description: Active groups and items, each ordered by sort order
+          description: One selected active response group and its ordered active items, or null
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ResponseGroup'
+                $ref: '#/components/schemas/ResponseGroup'
+                nullable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -427,8 +485,8 @@ paths:
   /public/content-feedback:
     post:
       tags: [Public feedback]
-      summary: Submit a content report or request for future staff review
-      description: This endpoint only stores feedback. It never changes menu content automatically.
+      summary: Submit a standalone feedback message for future staff review
+      description: This endpoint only stores the submitted name, IP address, and message. It never changes menu content automatically.
       requestBody:
         required: true
         content:
@@ -437,7 +495,7 @@ paths:
               $ref: '#/components/schemas/ContentFeedbackRequest'
       responses:
         '201':
-          description: Feedback recorded with PENDING status
+          description: Feedback recorded
           content:
             application/json:
               schema:
@@ -557,7 +615,7 @@ components:
           type: string
     ResponseGroup:
       type: object
-      required: [id, name, sort_order, items]
+      required: [id, name, items]
       properties:
         id:
           type: integer
@@ -567,8 +625,6 @@ components:
         description:
           type: string
           nullable: true
-        sort_order:
-          type: integer
         items:
           type: array
           items:
@@ -600,43 +656,22 @@ components:
           type: integer
     ContentFeedbackRequest:
       type: object
-      required: [feedback_type, category, message]
+      required: [full_name, ip, message]
       properties:
-        menu_option_id:
-          type: integer
-          format: int64
-          nullable: true
-        response_group_id:
-          type: integer
-          format: int64
-          nullable: true
-        feedback_type:
+        full_name:
           type: string
-          enum: [CONTENT_REPORT, CONTENT_REQUEST]
-        category:
+        ip:
           type: string
-          enum: [INCORRECT, INCOMPLETE, MISSING, UNCLEAR, OUTDATED, OTHER]
-        subject:
-          type: string
-          nullable: true
+          format: ipv4
         message:
           type: string
-        suggested_content:
-          type: string
-          nullable: true
-        source_url:
-          type: string
-          nullable: true
     ContentFeedbackCreated:
       type: object
-      required: [id, status, created_at]
+      required: [id, created_at]
       properties:
         id:
           type: integer
           format: int64
-        status:
-          type: string
-          enum: [PENDING]
         created_at:
           type: string
           format: date-time
@@ -661,33 +696,26 @@ components:
           format: int64
         message:
           type: string
-        sort_order:
-          type: integer
-          default: 0
         weight:
           type: integer
           minimum: 1
           default: 1
-    ReplaceResponseGroupRequest:
+    CreateResponseGroupRequest:
       type: object
       required: [menu_option_id, name, items]
       properties:
         menu_option_id:
           type: integer
           format: int64
-        response_group_id:
-          type: integer
-          format: int64
-          nullable: true
-          description: Supply this ID to replace the group's existing items.
         name:
           type: string
         description:
           type: string
           nullable: true
-        sort_order:
+        weight:
           type: integer
-          default: 0
+          minimum: 1
+          default: 1
         items:
           type: array
           items:
@@ -757,19 +785,20 @@ components:
       allOf:
         - $ref: '#/components/schemas/StaffMenuOptionRow'
         - type: object
-          required: [has_response]
+          required: [has_response, has_children]
           properties:
             has_response:
               type: boolean
               description: True when the option has at least one stored response item, regardless of active state.
+            has_children:
+              type: boolean
+              description: True when the option has at least one child menu option, regardless of active state.
     StaffMenuOptionPrompt:
       allOf:
         - $ref: '#/components/schemas/MenuOptionPrompt'
         - type: object
-          required: [sort_order, weight, is_active, created_at, updated_at]
+          required: [weight, is_active, created_at, updated_at]
           properties:
-            sort_order:
-              type: integer
             weight:
               type: integer
             is_active:
@@ -784,8 +813,14 @@ components:
       allOf:
         - $ref: '#/components/schemas/ResponseGroup'
         - type: object
-          required: [is_active, created_at, updated_at]
+          required: [menu_option_id, weight, is_active, created_at, updated_at]
           properties:
+            menu_option_id:
+              type: integer
+              format: int64
+            weight:
+              type: integer
+              minimum: 1
             is_active:
               type: boolean
             created_at:

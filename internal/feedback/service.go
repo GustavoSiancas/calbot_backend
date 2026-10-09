@@ -3,6 +3,7 @@ package feedback
 import (
 	"context"
 	"errors"
+	"net/netip"
 	"strings"
 
 	"calbot/internal/domain"
@@ -11,14 +12,9 @@ import (
 var ErrInvalidFeedback = errors.New("invalid content feedback")
 
 type CreateInput struct {
-	MenuOptionID     *int64
-	ResponseGroupID  *int64
-	FeedbackType     domain.ContentFeedbackType
-	Category         domain.ContentFeedbackCategory
-	Subject          *string
-	Message          string
-	SuggestedContent *string
-	SourceURL        *string
+	FullName string
+	IP       string
+	Message  string
 }
 
 type Service struct {
@@ -31,36 +27,15 @@ func NewService(store Store) *Service {
 
 // Create stores a report for later staff review. It does not modify menu content.
 func (s *Service) Create(ctx context.Context, input CreateInput) (domain.ContentFeedback, error) {
-	if strings.TrimSpace(input.Message) == "" || !isValidFeedbackType(input.FeedbackType) || !isValidCategory(input.Category) {
+	if strings.TrimSpace(input.FullName) == "" || strings.TrimSpace(input.Message) == "" {
+		return domain.ContentFeedback{}, ErrInvalidFeedback
+	}
+	if _, err := netip.ParseAddr(strings.TrimSpace(input.IP)); err != nil {
 		return domain.ContentFeedback{}, ErrInvalidFeedback
 	}
 	return s.store.Create(ctx, domain.ContentFeedback{
-		MenuOptionID:     input.MenuOptionID,
-		ResponseGroupID:  input.ResponseGroupID,
-		FeedbackType:     input.FeedbackType,
-		Category:         input.Category,
-		Subject:          input.Subject,
-		Message:          strings.TrimSpace(input.Message),
-		SuggestedContent: input.SuggestedContent,
-		SourceURL:        input.SourceURL,
-		Status:           domain.ContentFeedbackStatusPending,
+		FullName: strings.TrimSpace(input.FullName),
+		IP:       strings.TrimSpace(input.IP),
+		Message:  strings.TrimSpace(input.Message),
 	})
-}
-
-func isValidFeedbackType(value domain.ContentFeedbackType) bool {
-	return value == domain.ContentFeedbackTypeContentReport || value == domain.ContentFeedbackTypeContentRequest
-}
-
-func isValidCategory(value domain.ContentFeedbackCategory) bool {
-	switch value {
-	case domain.ContentFeedbackCategoryIncorrect,
-		domain.ContentFeedbackCategoryIncomplete,
-		domain.ContentFeedbackCategoryMissing,
-		domain.ContentFeedbackCategoryUnclear,
-		domain.ContentFeedbackCategoryOutdated,
-		domain.ContentFeedbackCategoryOther:
-		return true
-	default:
-		return false
-	}
 }

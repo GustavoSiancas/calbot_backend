@@ -11,11 +11,12 @@ import (
 )
 
 var (
-	ErrNotFound                           = errors.New("menu option not found")
-	ErrUnauthorized                       = errors.New("unauthorized")
-	ErrForbidden                          = errors.New("forbidden")
-	ErrInvalidInput                       = errors.New("invalid menu option input")
-	ErrResponseGroupDoesNotBelongToOption = errors.New("response group does not belong to menu option")
+	ErrNotFound              = errors.New("menu option not found")
+	ErrUnauthorized          = errors.New("unauthorized")
+	ErrForbidden             = errors.New("forbidden")
+	ErrInvalidInput          = errors.New("invalid menu option input")
+	ErrMenuOptionHasResponse = errors.New("menu option already has response items")
+	ErrMenuOptionHasChildren = errors.New("menu option already has child options")
 )
 
 type OptionDetail struct {
@@ -51,17 +52,15 @@ type CreateInput struct {
 }
 
 type PromptInput struct {
-	Message   string
-	SortOrder int
-	Weight    int
+	Message string
+	Weight  int
 }
 
 type ResponseGroupInput struct {
-	ResponseGroupID *int64
-	Name            string
-	Description     *string
-	SortOrder       int
-	Items           []ResponseItemInput
+	Name        string
+	Description *string
+	Weight      int
+	Items       []ResponseItemInput
 }
 
 type ResponseItemInput struct {
@@ -79,6 +78,15 @@ func (s *Service) Create(ctx context.Context, staffToken string, input CreateInp
 	}
 	if strings.TrimSpace(input.Title) == "" {
 		return domain.MenuOption{}, ErrInvalidInput
+	}
+	if input.ParentOptionID != nil {
+		hasResponse, err := s.store.HasResponseItems(ctx, *input.ParentOptionID)
+		if err != nil {
+			return domain.MenuOption{}, err
+		}
+		if hasResponse {
+			return domain.MenuOption{}, ErrMenuOptionHasResponse
+		}
 	}
 	return s.store.CreateMenuOption(ctx, domain.MenuOption{ParentOptionID: input.ParentOptionID, Title: strings.TrimSpace(input.Title), SortOrder: input.SortOrder})
 }
@@ -116,7 +124,7 @@ func (s *Service) CreatePrompt(ctx context.Context, staffToken string, menuOptio
 	if menuOptionID < 1 || strings.TrimSpace(input.Message) == "" || input.Weight <= 0 {
 		return domain.MenuOptionPrompt{}, ErrInvalidInput
 	}
-	return s.store.CreatePrompt(ctx, domain.MenuOptionPrompt{MenuOptionID: menuOptionID, Message: strings.TrimSpace(input.Message), SortOrder: input.SortOrder, Weight: input.Weight})
+	return s.store.CreatePrompt(ctx, domain.MenuOptionPrompt{MenuOptionID: menuOptionID, Message: strings.TrimSpace(input.Message), Weight: input.Weight})
 }
 
 func (s *Service) DeletePrompt(ctx context.Context, staffToken string, id int64) error {
@@ -146,11 +154,11 @@ func (s *Service) SetPromptActive(ctx context.Context, staffToken string, id int
 	return prompt, nil
 }
 
-func (s *Service) ReplaceResponseGroup(ctx context.Context, staffToken string, menuOptionID int64, input ResponseGroupInput) (domain.ResponseGroup, []domain.ResponseItem, error) {
+func (s *Service) CreateResponseGroup(ctx context.Context, staffToken string, menuOptionID int64, input ResponseGroupInput) (domain.ResponseGroup, []domain.ResponseItem, error) {
 	if err := s.requireStaff(staffToken); err != nil {
 		return domain.ResponseGroup{}, nil, err
 	}
-	if menuOptionID < 1 || strings.TrimSpace(input.Name) == "" || (input.ResponseGroupID != nil && *input.ResponseGroupID < 1) {
+	if menuOptionID < 1 || strings.TrimSpace(input.Name) == "" || input.Weight <= 0 {
 		return domain.ResponseGroup{}, nil, ErrInvalidInput
 	}
 	items := make([]domain.ResponseItem, 0, len(input.Items))
@@ -160,11 +168,16 @@ func (s *Service) ReplaceResponseGroup(ctx context.Context, staffToken string, m
 		}
 		items = append(items, domain.ResponseItem{Type: item.Type, Text: item.Text, URL: item.URL, Caption: item.Caption, Metadata: item.Metadata, SortOrder: item.SortOrder})
 	}
-	group, createdItems, err := s.store.ReplaceResponseGroup(ctx, menuOptionID, input.ResponseGroupID, domain.ResponseGroup{Name: strings.TrimSpace(input.Name), Description: input.Description, SortOrder: input.SortOrder}, items)
-	if errors.Is(err, ErrResponseGroupDoesNotBelongToOption) {
-		return domain.ResponseGroup{}, nil, err
+	if len(items) > 0 {
+		hasChildren, err := s.store.HasChildren(ctx, menuOptionID)
+		if err != nil {
+			return domain.ResponseGroup{}, nil, err
+		}
+		if hasChildren {
+			return domain.ResponseGroup{}, nil, ErrMenuOptionHasChildren
+		}
 	}
-	return group, createdItems, err
+	return s.store.CreateResponseGroup(ctx, menuOptionID, domain.ResponseGroup{Name: strings.TrimSpace(input.Name), Description: input.Description, Weight: input.Weight}, items)
 }
 
 func validResponseItem(item ResponseItemInput) bool {
@@ -264,6 +277,44 @@ func (s *Service) ListPromptsForStaff(ctx context.Context, staffToken string, me
 	return s.store.ListAllPrompts(ctx, menuOptionID)
 }
 
+func (s *Service) ListResponseGroupsForStaff(ctx context.Context, staffToken string, menuOptionID int64) ([]ResponseGroupDetail, error) {
+	if err := s.requireStaff(staffToken); err != nil {
+		return nil, err
+	}
+	if menuOptionID < 1 {
+		return nil, ErrInvalidInput
+	}
+	if _, err := s.store.GetMenuOptionByID(ctx, menuOptionID); err != nil {
+		return nil, ErrNotFound
+	}
+	groups, err := s.store.ListAllResponseGroups(ctx, menuOptionID)
+	if err != nil {
+		return nil, err
+	}
+	result := make([]ResponseGroupDetail, 0, len(groups))
+	for _, group := range groups {
+		items, err := s.store.ListAllResponseItems(ctx, group.ID)
+		if err != nil {
+			return nil, err
+		}
+		result = append(result, ResponseGroupDetail{ResponseGroup: group, ResponseItems: items})
+	}
+	return result, nil
+}
+
+func (s *Service) DeleteResponseGroup(ctx context.Context, staffToken string, id int64) error {
+	if err := s.requireStaff(staffToken); err != nil {
+		return err
+	}
+	if id < 1 {
+		return ErrInvalidInput
+	}
+	if err := s.store.DeleteResponseGroup(ctx, id); err != nil {
+		return ErrNotFound
+	}
+	return nil
+}
+
 func (s *Service) GetOptionDetail(ctx context.Context, id int64) (OptionDetail, error) {
 	option, err := s.store.GetActiveOption(ctx, id)
 	if err != nil {
@@ -280,22 +331,20 @@ func (s *Service) GetOptionDetail(ctx context.Context, id int64) (OptionDetail, 
 	return OptionDetail{MenuOption: option, Prompt: prompt, Children: children}, nil
 }
 
-func (s *Service) GetActiveResponses(ctx context.Context, menuOptionID int64) ([]ResponseGroupDetail, error) {
+func (s *Service) GetActiveResponse(ctx context.Context, menuOptionID int64) (*ResponseGroupDetail, error) {
 	if _, err := s.store.GetActiveOption(ctx, menuOptionID); err != nil {
 		return nil, ErrNotFound
 	}
-	groups, err := s.store.ListActiveResponseGroups(ctx, menuOptionID)
+	group, err := s.store.GetWeightedRandomActiveResponseGroup(ctx, menuOptionID)
 	if err != nil {
 		return nil, err
 	}
-
-	result := make([]ResponseGroupDetail, 0, len(groups))
-	for _, group := range groups {
-		items, err := s.store.ListActiveResponseItems(ctx, group.ID)
-		if err != nil {
-			return nil, err
-		}
-		result = append(result, ResponseGroupDetail{ResponseGroup: group, ResponseItems: items})
+	if group == nil {
+		return nil, nil
 	}
-	return result, nil
+	items, err := s.store.ListActiveResponseItems(ctx, group.ID)
+	if err != nil {
+		return nil, err
+	}
+	return &ResponseGroupDetail{ResponseGroup: *group, ResponseItems: items}, nil
 }

@@ -8,7 +8,7 @@ type ResponseGroup struct {
 	MenuOptionID int64
 	Name         string
 	Description  *string
-	SortOrder    int
+	Weight       int
 	IsActive     bool
 	CreatedAt    time.Time
 	UpdatedAt    time.Time

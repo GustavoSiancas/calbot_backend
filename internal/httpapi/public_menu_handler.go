@@ -30,7 +30,7 @@ func (h *PublicMenuHandler) getResponses(w http.ResponseWriter, r *http.Request)
 		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "menu option id must be a positive integer"})
 		return
 	}
-	groups, err := h.service.GetActiveResponses(r.Context(), id)
+	group, err := h.service.GetActiveResponse(r.Context(), id)
 	if errors.Is(err, menu.ErrNotFound) {
 		writeJSON(w, http.StatusNotFound, map[string]string{"error": "active menu option not found"})
 		return
@@ -40,14 +40,15 @@ func (h *PublicMenuHandler) getResponses(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
-	response := make([]responseGroupResponse, 0, len(groups))
-	for _, group := range groups {
-		items := make([]responseItemResponse, 0, len(group.ResponseItems))
-		for _, item := range group.ResponseItems {
-			items = append(items, responseItemResponse{ID: item.ID, Type: item.Type, Text: item.Text, URL: item.URL, Caption: item.Caption, Metadata: item.Metadata, SortOrder: item.SortOrder})
-		}
-		response = append(response, responseGroupResponse{ID: group.ResponseGroup.ID, Name: group.ResponseGroup.Name, Description: group.ResponseGroup.Description, SortOrder: group.ResponseGroup.SortOrder, Items: items})
+	if group == nil {
+		writeJSON(w, http.StatusOK, nil)
+		return
 	}
+	items := make([]responseItemResponse, 0, len(group.ResponseItems))
+	for _, item := range group.ResponseItems {
+		items = append(items, responseItemResponse{ID: item.ID, Type: item.Type, Text: item.Text, URL: item.URL, Caption: item.Caption, Metadata: item.Metadata, SortOrder: item.SortOrder})
+	}
+	response := responseGroupResponse{ID: group.ResponseGroup.ID, Name: group.ResponseGroup.Name, Description: group.ResponseGroup.Description, Items: items}
 	writeJSON(w, http.StatusOK, response)
 }
 
@@ -116,7 +117,6 @@ type responseGroupResponse struct {
 	ID          int64                  `json:"id"`
 	Name        string                 `json:"name"`
 	Description *string                `json:"description"`
-	SortOrder   int                    `json:"sort_order"`
 	Items       []responseItemResponse `json:"items"`
 }
 

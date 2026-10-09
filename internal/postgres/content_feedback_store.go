@@ -18,36 +18,20 @@ func NewContentFeedbackStore(pool *pgxpool.Pool) *ContentFeedbackStore {
 
 func (s *ContentFeedbackStore) Create(ctx context.Context, feedback domain.ContentFeedback) (domain.ContentFeedback, error) {
 	const query = `INSERT INTO content_feedback (
-	menu_option_id, response_group_id, feedback_type, category,
-	subject, message, suggested_content, source_url, status
-) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, 'PENDING')
-RETURNING id, menu_option_id, response_group_id, feedback_type, category,
-subject, message, suggested_content, source_url, status, admin_notes, created_at, reviewed_at, resolved_at`
+	full_name, ip, message
+) VALUES ($1, $2, $3)
+RETURNING id, full_name, host(ip), message, created_at`
 
 	err := s.pool.QueryRow(ctx, query,
-		feedback.MenuOptionID,
-		feedback.ResponseGroupID,
-		feedback.FeedbackType,
-		feedback.Category,
-		feedback.Subject,
+		feedback.FullName,
+		feedback.IP,
 		feedback.Message,
-		feedback.SuggestedContent,
-		feedback.SourceURL,
 	).Scan(
 		&feedback.ID,
-		&feedback.MenuOptionID,
-		&feedback.ResponseGroupID,
-		&feedback.FeedbackType,
-		&feedback.Category,
-		&feedback.Subject,
+		&feedback.FullName,
+		&feedback.IP,
 		&feedback.Message,
-		&feedback.SuggestedContent,
-		&feedback.SourceURL,
-		&feedback.Status,
-		&feedback.AdminNotes,
 		&feedback.CreatedAt,
-		&feedback.ReviewedAt,
-		&feedback.ResolvedAt,
 	)
 	return feedback, err
 }

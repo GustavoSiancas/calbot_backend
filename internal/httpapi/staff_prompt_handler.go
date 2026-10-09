@@ -44,7 +44,7 @@ func (h *StaffPromptHandler) list(w http.ResponseWriter, r *http.Request) {
 	}
 	response := make([]staffPromptResponse, 0, len(prompts))
 	for _, prompt := range prompts {
-		response = append(response, staffPromptResponse{ID: prompt.ID, Message: prompt.Message, SortOrder: prompt.SortOrder, Weight: prompt.Weight, IsActive: prompt.IsActive, CreatedAt: prompt.CreatedAt, UpdatedAt: prompt.UpdatedAt})
+		response = append(response, staffPromptResponse{ID: prompt.ID, Message: prompt.Message, Weight: prompt.Weight, IsActive: prompt.IsActive, CreatedAt: prompt.CreatedAt, UpdatedAt: prompt.UpdatedAt})
 	}
 	writeJSON(w, http.StatusOK, response)
 }
@@ -53,7 +53,6 @@ func (h *StaffPromptHandler) create(w http.ResponseWriter, r *http.Request) {
 	var request struct {
 		MenuOptionID int64  `json:"menu_option_id"`
 		Message      string `json:"message"`
-		SortOrder    int    `json:"sort_order"`
 		Weight       *int   `json:"weight"`
 	}
 	if !decodeJSON(w, r, &request) {
@@ -63,7 +62,7 @@ func (h *StaffPromptHandler) create(w http.ResponseWriter, r *http.Request) {
 	if request.Weight != nil {
 		weight = *request.Weight
 	}
-	prompt, err := h.service.CreatePrompt(r.Context(), bearerToken(r), request.MenuOptionID, menu.PromptInput{Message: request.Message, SortOrder: request.SortOrder, Weight: weight})
+	prompt, err := h.service.CreatePrompt(r.Context(), bearerToken(r), request.MenuOptionID, menu.PromptInput{Message: request.Message, Weight: weight})
 	if !handleMenuAuthorizationError(w, err) {
 		return
 	}
