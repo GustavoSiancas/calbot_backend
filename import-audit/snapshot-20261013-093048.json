@@ -1,0 +1,571 @@
+﻿[
+    {
+        "id":  17,
+        "parent_option_id":  null,
+        "title":  "Trámites y servicios",
+        "description":  null,
+        "sort_order":  0,
+        "has_prompt":  true,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:17.007772Z",
+        "updated_at":  "2026-10-13T14:30:17.007772Z",
+        "prompts":  [
+                        {
+                            "id":  5,
+                            "message":  "¿Qué trámite o servicio necesitas realizar? 😊 Elige una opción para continuar.",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:30:25.482215Z",
+                            "updated_at":  "2026-10-13T14:30:25.482215Z"
+                        },
+                        {
+                            "id":  6,
+                            "message":  "¡Claro! Cuéntame qué trámite buscas y te ayudo a encontrarlo. 👇",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:30:25.798314Z",
+                            "updated_at":  "2026-10-13T14:30:25.798314Z"
+                        },
+                        {
+                            "id":  7,
+                            "message":  "¿En qué trámite o servicio del CAL puedo ayudarte hoy? Selecciona una opción. 📋",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:30:26.099278Z",
+                            "updated_at":  "2026-10-13T14:30:26.099278Z"
+                        }
+                    ],
+        "response_groups":  [
+
+                            ]
+    },
+    {
+        "id":  18,
+        "parent_option_id":  17,
+        "title":  "Pago de incorporación",
+        "description":  null,
+        "sort_order":  0,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:17.347079Z",
+        "updated_at":  "2026-10-13T14:30:17.347079Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+                                {
+                                    "id":  7,
+                                    "menu_option_id":  18,
+                                    "name":  "Pago de incorporación",
+                                    "description":  "Orientación para el pago de incorporación.",
+                                    "weight":  2,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:30:29.258756Z",
+                                    "updated_at":  "2026-10-13T14:30:29.258756Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  12,
+                                                      "type":  "TEXT",
+                                                      "text":  "Para iniciar tu incorporación, revisa el portal oficial y confirma allí los requisitos y el importe vigente antes de pagar.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:30:29.258756Z",
+                                                      "updated_at":  "2026-10-13T14:30:29.258756Z"
+                                                  },
+                                                  {
+                                                      "id":  13,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://incorporacion.cal.org.pe/",
+                                                      "caption":  "Portal de incorporaciones",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:30:29.258756Z",
+                                                      "updated_at":  "2026-10-13T14:30:29.258756Z"
+                                                  }
+                                              ]
+                                }
+                            ]
+    },
+    {
+        "id":  25,
+        "parent_option_id":  24,
+        "title":  "Pago en línea",
+        "description":  null,
+        "sort_order":  0,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:19.58339Z",
+        "updated_at":  "2026-10-13T14:30:19.58339Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+
+                            ]
+    },
+    {
+        "id":  30,
+        "parent_option_id":  29,
+        "title":  "Avisos",
+        "description":  null,
+        "sort_order":  0,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:21.466298Z",
+        "updated_at":  "2026-10-13T14:30:21.466298Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+
+                            ]
+    },
+    {
+        "id":  38,
+        "parent_option_id":  37,
+        "title":  "Página web",
+        "description":  null,
+        "sort_order":  0,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:23.973271Z",
+        "updated_at":  "2026-10-13T14:30:23.973271Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+
+                            ]
+    },
+    {
+        "id":  19,
+        "parent_option_id":  17,
+        "title":  "Pago del CECAL (Centro de Esparcimiento)",
+        "description":  null,
+        "sort_order":  1,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:17.668816Z",
+        "updated_at":  "2026-10-13T14:30:17.668816Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+
+                            ]
+    },
+    {
+        "id":  24,
+        "parent_option_id":  null,
+        "title":  "Pagos y beneficios",
+        "description":  null,
+        "sort_order":  1,
+        "has_prompt":  true,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:19.251152Z",
+        "updated_at":  "2026-10-13T14:30:19.251152Z",
+        "prompts":  [
+                        {
+                            "id":  8,
+                            "message":  "¿Quieres consultar un pago o conocer tus beneficios? Elige una opción. 💳",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:30:26.459907Z",
+                            "updated_at":  "2026-10-13T14:30:26.459907Z"
+                        },
+                        {
+                            "id":  9,
+                            "message":  "Te ayudo con pagos y beneficios. ¿Qué te gustaría revisar? 😊",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:30:26.760883Z",
+                            "updated_at":  "2026-10-13T14:30:26.760883Z"
+                        },
+                        {
+                            "id":  10,
+                            "message":  "¡Vamos a ello! Selecciona el pago o beneficio que te interesa. ✨",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:30:27.059983Z",
+                            "updated_at":  "2026-10-13T14:30:27.059983Z"
+                        }
+                    ],
+        "response_groups":  [
+
+                            ]
+    },
+    {
+        "id":  26,
+        "parent_option_id":  24,
+        "title":  "Consulta de deuda",
+        "description":  null,
+        "sort_order":  1,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:19.877193Z",
+        "updated_at":  "2026-10-13T14:30:19.877193Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+
+                            ]
+    },
+    {
+        "id":  31,
+        "parent_option_id":  29,
+        "title":  "Notas de prensa",
+        "description":  null,
+        "sort_order":  1,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:21.790213Z",
+        "updated_at":  "2026-10-13T14:30:21.790213Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+
+                            ]
+    },
+    {
+        "id":  39,
+        "parent_option_id":  37,
+        "title":  "Números de atención",
+        "description":  null,
+        "sort_order":  1,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:24.262153Z",
+        "updated_at":  "2026-10-13T14:30:24.262153Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+
+                            ]
+    },
+    {
+        "id":  20,
+        "parent_option_id":  17,
+        "title":  "Pago de cuota ordinaria",
+        "description":  null,
+        "sort_order":  2,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:18.009256Z",
+        "updated_at":  "2026-10-13T14:30:18.009256Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+
+                            ]
+    },
+    {
+        "id":  27,
+        "parent_option_id":  24,
+        "title":  "Club de beneficios",
+        "description":  null,
+        "sort_order":  2,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:20.168364Z",
+        "updated_at":  "2026-10-13T14:30:20.168364Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+
+                            ]
+    },
+    {
+        "id":  29,
+        "parent_option_id":  null,
+        "title":  "Noticias",
+        "description":  null,
+        "sort_order":  2,
+        "has_prompt":  true,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:21.055199Z",
+        "updated_at":  "2026-10-13T14:30:21.055199Z",
+        "prompts":  [
+                        {
+                            "id":  11,
+                            "message":  "¿Qué novedades del CAL te gustaría conocer? 📰 Elige una opción.",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:30:27.37995Z",
+                            "updated_at":  "2026-10-13T14:30:27.37995Z"
+                        },
+                        {
+                            "id":  12,
+                            "message":  "Te comparto las novedades del CAL. ¿Qué tema te interesa? 👀",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:30:27.68396Z",
+                            "updated_at":  "2026-10-13T14:30:27.68396Z"
+                        },
+                        {
+                            "id":  13,
+                            "message":  "¿Buscas noticias o comunicados recientes? Selecciona una opción para continuar. 📣",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:30:27.98824Z",
+                            "updated_at":  "2026-10-13T14:30:27.98824Z"
+                        }
+                    ],
+        "response_groups":  [
+
+                            ]
+    },
+    {
+        "id":  32,
+        "parent_option_id":  29,
+        "title":  "Comunicados",
+        "description":  null,
+        "sort_order":  2,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:22.076746Z",
+        "updated_at":  "2026-10-13T14:30:22.076746Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+
+                            ]
+    },
+    {
+        "id":  40,
+        "parent_option_id":  37,
+        "title":  "WhatsApp",
+        "description":  null,
+        "sort_order":  2,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:24.556286Z",
+        "updated_at":  "2026-10-13T14:30:24.556286Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+
+                            ]
+    },
+    {
+        "id":  21,
+        "parent_option_id":  17,
+        "title":  "Consulta de habilidad",
+        "description":  null,
+        "sort_order":  3,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:18.314003Z",
+        "updated_at":  "2026-10-13T14:30:18.314003Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+
+                            ]
+    },
+    {
+        "id":  28,
+        "parent_option_id":  24,
+        "title":  "Devolución de pagos errados",
+        "description":  null,
+        "sort_order":  3,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:20.508426Z",
+        "updated_at":  "2026-10-13T14:30:20.508426Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+
+                            ]
+    },
+    {
+        "id":  33,
+        "parent_option_id":  29,
+        "title":  "Convocatorias",
+        "description":  null,
+        "sort_order":  3,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:22.364049Z",
+        "updated_at":  "2026-10-13T14:30:22.364049Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+
+                            ]
+    },
+    {
+        "id":  37,
+        "parent_option_id":  null,
+        "title":  "Contacto y sedes",
+        "description":  null,
+        "sort_order":  3,
+        "has_prompt":  true,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:23.644054Z",
+        "updated_at":  "2026-10-13T14:30:23.644054Z",
+        "prompts":  [
+                        {
+                            "id":  14,
+                            "message":  "¿Necesitas comunicarte con el CAL o ubicar una sede? 📍 Elige una opción.",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:30:28.347894Z",
+                            "updated_at":  "2026-10-13T14:30:28.347894Z"
+                        },
+                        {
+                            "id":  15,
+                            "message":  "¡Te ayudo a encontrarnos! ¿Buscas un contacto, una dirección o un horario? 😊",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:30:28.635706Z",
+                            "updated_at":  "2026-10-13T14:30:28.635706Z"
+                        },
+                        {
+                            "id":  16,
+                            "message":  "¿Cómo podemos ayudarte a contactar al CAL? Selecciona una opción para seguir. ☎️",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:30:28.919525Z",
+                            "updated_at":  "2026-10-13T14:30:28.919525Z"
+                        }
+                    ],
+        "response_groups":  [
+
+                            ]
+    },
+    {
+        "id":  41,
+        "parent_option_id":  37,
+        "title":  "Correos electrónicos",
+        "description":  null,
+        "sort_order":  3,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:24.865816Z",
+        "updated_at":  "2026-10-13T14:30:24.865816Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+
+                            ]
+    },
+    {
+        "id":  22,
+        "parent_option_id":  17,
+        "title":  "Papeleta de habilidad",
+        "description":  null,
+        "sort_order":  4,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:18.633711Z",
+        "updated_at":  "2026-10-13T14:30:18.633711Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+
+                            ]
+    },
+    {
+        "id":  34,
+        "parent_option_id":  29,
+        "title":  "Formación integral",
+        "description":  null,
+        "sort_order":  4,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:22.685558Z",
+        "updated_at":  "2026-10-13T14:30:22.685558Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+
+                            ]
+    },
+    {
+        "id":  42,
+        "parent_option_id":  37,
+        "title":  "Sedes y horarios",
+        "description":  null,
+        "sort_order":  4,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:25.163536Z",
+        "updated_at":  "2026-10-13T14:30:25.163536Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+
+                            ]
+    },
+    {
+        "id":  23,
+        "parent_option_id":  17,
+        "title":  "Mesa de partes virtual",
+        "description":  null,
+        "sort_order":  5,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:18.932853Z",
+        "updated_at":  "2026-10-13T14:30:18.932853Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+
+                            ]
+    },
+    {
+        "id":  35,
+        "parent_option_id":  29,
+        "title":  "Pronunciamientos",
+        "description":  null,
+        "sort_order":  5,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:23.037213Z",
+        "updated_at":  "2026-10-13T14:30:23.037213Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+
+                            ]
+    },
+    {
+        "id":  36,
+        "parent_option_id":  29,
+        "title":  "Ver últimas noticias",
+        "description":  null,
+        "sort_order":  6,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:23.350478Z",
+        "updated_at":  "2026-10-13T14:30:23.350478Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+
+                            ]
+    }
+]

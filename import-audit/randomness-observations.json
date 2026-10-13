@@ -1,0 +1,250 @@
+﻿[
+    {
+        "kind":  "prompt",
+        "menu_option_id":  17,
+        "requests":  20,
+        "frequencies":  {
+                            "18":  4,
+                            "17":  7,
+                            "5":  3,
+                            "7":  6
+                        }
+    },
+    {
+        "kind":  "prompt",
+        "menu_option_id":  24,
+        "requests":  20,
+        "frequencies":  {
+                            "20":  6,
+                            "9":  2,
+                            "19":  4,
+                            "10":  3,
+                            "8":  5
+                        }
+    },
+    {
+        "kind":  "prompt",
+        "menu_option_id":  29,
+        "requests":  20,
+        "frequencies":  {
+                            "12":  5,
+                            "21":  5,
+                            "11":  2,
+                            "22":  5,
+                            "13":  3
+                        }
+    },
+    {
+        "kind":  "prompt",
+        "menu_option_id":  37,
+        "requests":  20,
+        "frequencies":  {
+                            "16":  2,
+                            "15":  2,
+                            "23":  4,
+                            "14":  5,
+                            "24":  7
+                        }
+    },
+    {
+        "kind":  "response",
+        "menu_option_id":  18,
+        "requests":  12,
+        "frequencies":  {
+                            "8":  5,
+                            "32":  2,
+                            "7":  5
+                        }
+    },
+    {
+        "kind":  "response",
+        "menu_option_id":  19,
+        "requests":  12,
+        "frequencies":  {
+                            "9":  7,
+                            "33":  2,
+                            "10":  3
+                        }
+    },
+    {
+        "kind":  "response",
+        "menu_option_id":  20,
+        "requests":  12,
+        "frequencies":  {
+                            "12":  2,
+                            "34":  3,
+                            "11":  7
+                        }
+    },
+    {
+        "kind":  "response",
+        "menu_option_id":  21,
+        "requests":  12,
+        "frequencies":  {
+                            "35":  7,
+                            "13":  5
+                        }
+    },
+    {
+        "kind":  "response",
+        "menu_option_id":  22,
+        "requests":  12,
+        "frequencies":  {
+                            "14":  6,
+                            "36":  6
+                        }
+    },
+    {
+        "kind":  "response",
+        "menu_option_id":  23,
+        "requests":  12,
+        "frequencies":  {
+                            "15":  7,
+                            "37":  5
+                        }
+    },
+    {
+        "kind":  "response",
+        "menu_option_id":  25,
+        "requests":  12,
+        "frequencies":  {
+                            "16":  8,
+                            "38":  4
+                        }
+    },
+    {
+        "kind":  "response",
+        "menu_option_id":  26,
+        "requests":  12,
+        "frequencies":  {
+                            "17":  8,
+                            "39":  4
+                        }
+    },
+    {
+        "kind":  "response",
+        "menu_option_id":  27,
+        "requests":  12,
+        "frequencies":  {
+                            "18":  4,
+                            "40":  8
+                        }
+    },
+    {
+        "kind":  "response",
+        "menu_option_id":  28,
+        "requests":  12,
+        "frequencies":  {
+                            "19":  5,
+                            "41":  7
+                        }
+    },
+    {
+        "kind":  "response",
+        "menu_option_id":  30,
+        "requests":  12,
+        "frequencies":  {
+                            "42":  7,
+                            "20":  5
+                        }
+    },
+    {
+        "kind":  "response",
+        "menu_option_id":  31,
+        "requests":  12,
+        "frequencies":  {
+                            "21":  5,
+                            "43":  7
+                        }
+    },
+    {
+        "kind":  "response",
+        "menu_option_id":  32,
+        "requests":  12,
+        "frequencies":  {
+                            "22":  3,
+                            "44":  9
+                        }
+    },
+    {
+        "kind":  "response",
+        "menu_option_id":  33,
+        "requests":  12,
+        "frequencies":  {
+                            "45":  4,
+                            "23":  8
+                        }
+    },
+    {
+        "kind":  "response",
+        "menu_option_id":  34,
+        "requests":  12,
+        "frequencies":  {
+                            "24":  4,
+                            "46":  8
+                        }
+    },
+    {
+        "kind":  "response",
+        "menu_option_id":  35,
+        "requests":  12,
+        "frequencies":  {
+                            "47":  6,
+                            "25":  6
+                        }
+    },
+    {
+        "kind":  "response",
+        "menu_option_id":  36,
+        "requests":  12,
+        "frequencies":  {
+                            "26":  6,
+                            "48":  6
+                        }
+    },
+    {
+        "kind":  "response",
+        "menu_option_id":  38,
+        "requests":  12,
+        "frequencies":  {
+                            "49":  6,
+                            "27":  6
+                        }
+    },
+    {
+        "kind":  "response",
+        "menu_option_id":  39,
+        "requests":  12,
+        "frequencies":  {
+                            "50":  7,
+                            "28":  5
+                        }
+    },
+    {
+        "kind":  "response",
+        "menu_option_id":  40,
+        "requests":  12,
+        "frequencies":  {
+                            "51":  4,
+                            "29":  8
+                        }
+    },
+    {
+        "kind":  "response",
+        "menu_option_id":  41,
+        "requests":  12,
+        "frequencies":  {
+                            "52":  7,
+                            "30":  5
+                        }
+    },
+    {
+        "kind":  "response",
+        "menu_option_id":  42,
+        "requests":  12,
+        "frequencies":  {
+                            "53":  7,
+                            "31":  5
+                        }
+    }
+]

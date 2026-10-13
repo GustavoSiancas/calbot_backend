@@ -1,0 +1,317 @@
+﻿[
+    {
+        "kind":  "option",
+        "id":  17,
+        "title":  "Trámites y servicios"
+    },
+    {
+        "kind":  "option",
+        "id":  18,
+        "title":  "Pago de incorporación"
+    },
+    {
+        "kind":  "option",
+        "id":  19,
+        "title":  "Pago del CECAL (Centro de Esparcimiento)"
+    },
+    {
+        "kind":  "option",
+        "id":  20,
+        "title":  "Pago de cuota ordinaria"
+    },
+    {
+        "kind":  "option",
+        "id":  21,
+        "title":  "Consulta de habilidad"
+    },
+    {
+        "kind":  "option",
+        "id":  22,
+        "title":  "Papeleta de habilidad"
+    },
+    {
+        "kind":  "option",
+        "id":  23,
+        "title":  "Mesa de partes virtual"
+    },
+    {
+        "kind":  "option",
+        "id":  24,
+        "title":  "Pagos y beneficios"
+    },
+    {
+        "kind":  "option",
+        "id":  25,
+        "title":  "Pago en línea"
+    },
+    {
+        "kind":  "option",
+        "id":  26,
+        "title":  "Consulta de deuda"
+    },
+    {
+        "kind":  "option",
+        "id":  27,
+        "title":  "Club de beneficios"
+    },
+    {
+        "kind":  "option",
+        "id":  28,
+        "title":  "Devolución de pagos errados"
+    },
+    {
+        "kind":  "option",
+        "id":  29,
+        "title":  "Noticias"
+    },
+    {
+        "kind":  "option",
+        "id":  30,
+        "title":  "Avisos"
+    },
+    {
+        "kind":  "option",
+        "id":  31,
+        "title":  "Notas de prensa"
+    },
+    {
+        "kind":  "option",
+        "id":  32,
+        "title":  "Comunicados"
+    },
+    {
+        "kind":  "option",
+        "id":  33,
+        "title":  "Convocatorias"
+    },
+    {
+        "kind":  "option",
+        "id":  34,
+        "title":  "Formación integral"
+    },
+    {
+        "kind":  "option",
+        "id":  35,
+        "title":  "Pronunciamientos"
+    },
+    {
+        "kind":  "option",
+        "id":  36,
+        "title":  "Ver últimas noticias"
+    },
+    {
+        "kind":  "option",
+        "id":  37,
+        "title":  "Contacto y sedes"
+    },
+    {
+        "kind":  "option",
+        "id":  38,
+        "title":  "Página web"
+    },
+    {
+        "kind":  "option",
+        "id":  39,
+        "title":  "Números de atención"
+    },
+    {
+        "kind":  "option",
+        "id":  40,
+        "title":  "WhatsApp"
+    },
+    {
+        "kind":  "option",
+        "id":  41,
+        "title":  "Correos electrónicos"
+    },
+    {
+        "kind":  "option",
+        "id":  42,
+        "title":  "Sedes y horarios"
+    },
+    {
+        "kind":  "prompt",
+        "id":  5,
+        "title":  "¿Qué trámite o servicio necesitas realizar? 😊 Elige una opción para continuar."
+    },
+    {
+        "kind":  "prompt",
+        "id":  6,
+        "title":  "¡Claro! Cuéntame qué trámite buscas y te ayudo a encontrarlo. 👇"
+    },
+    {
+        "kind":  "prompt",
+        "id":  7,
+        "title":  "¿En qué trámite o servicio del CAL puedo ayudarte hoy? Selecciona una opción. 📋"
+    },
+    {
+        "kind":  "prompt",
+        "id":  8,
+        "title":  "¿Quieres consultar un pago o conocer tus beneficios? Elige una opción. 💳"
+    },
+    {
+        "kind":  "prompt",
+        "id":  9,
+        "title":  "Te ayudo con pagos y beneficios. ¿Qué te gustaría revisar? 😊"
+    },
+    {
+        "kind":  "prompt",
+        "id":  10,
+        "title":  "¡Vamos a ello! Selecciona el pago o beneficio que te interesa. ✨"
+    },
+    {
+        "kind":  "prompt",
+        "id":  11,
+        "title":  "¿Qué novedades del CAL te gustaría conocer? 📰 Elige una opción."
+    },
+    {
+        "kind":  "prompt",
+        "id":  12,
+        "title":  "Te comparto las novedades del CAL. ¿Qué tema te interesa? 👀"
+    },
+    {
+        "kind":  "prompt",
+        "id":  13,
+        "title":  "¿Buscas noticias o comunicados recientes? Selecciona una opción para continuar. 📣"
+    },
+    {
+        "kind":  "prompt",
+        "id":  14,
+        "title":  "¿Necesitas comunicarte con el CAL o ubicar una sede? 📍 Elige una opción."
+    },
+    {
+        "kind":  "prompt",
+        "id":  15,
+        "title":  "¡Te ayudo a encontrarnos! ¿Buscas un contacto, una dirección o un horario? 😊"
+    },
+    {
+        "kind":  "prompt",
+        "id":  16,
+        "title":  "¿Cómo podemos ayudarte a contactar al CAL? Selecciona una opción para seguir. ☎️"
+    },
+    {
+        "kind":  "response_group",
+        "id":  7,
+        "title":  "Pago de incorporación"
+    },
+    {
+        "kind":  "response_group",
+        "id":  8,
+        "title":  "Pago de incorporación — alternativa"
+    },
+    {
+        "kind":  "response_group",
+        "id":  9,
+        "title":  "Pago del CECAL (Centro de Esparcimiento)"
+    },
+    {
+        "kind":  "response_group",
+        "id":  10,
+        "title":  "Pago del CECAL (Centro de Esparcimiento) — alternativa"
+    },
+    {
+        "kind":  "response_group",
+        "id":  11,
+        "title":  "Pago de cuota ordinaria"
+    },
+    {
+        "kind":  "response_group",
+        "id":  12,
+        "title":  "Pago de cuota ordinaria — alternativa"
+    },
+    {
+        "kind":  "response_group",
+        "id":  13,
+        "title":  "Consulta de habilidad"
+    },
+    {
+        "kind":  "response_group",
+        "id":  14,
+        "title":  "Papeleta de habilidad"
+    },
+    {
+        "kind":  "response_group",
+        "id":  15,
+        "title":  "Mesa de partes virtual"
+    },
+    {
+        "kind":  "response_group",
+        "id":  16,
+        "title":  "Pago en línea"
+    },
+    {
+        "kind":  "response_group",
+        "id":  17,
+        "title":  "Consulta de deuda"
+    },
+    {
+        "kind":  "response_group",
+        "id":  18,
+        "title":  "Club de beneficios"
+    },
+    {
+        "kind":  "response_group",
+        "id":  19,
+        "title":  "Devolución de pagos errados"
+    },
+    {
+        "kind":  "response_group",
+        "id":  20,
+        "title":  "Avisos"
+    },
+    {
+        "kind":  "response_group",
+        "id":  21,
+        "title":  "Notas de prensa"
+    },
+    {
+        "kind":  "response_group",
+        "id":  22,
+        "title":  "Comunicados"
+    },
+    {
+        "kind":  "response_group",
+        "id":  23,
+        "title":  "Convocatorias"
+    },
+    {
+        "kind":  "response_group",
+        "id":  24,
+        "title":  "Formación integral"
+    },
+    {
+        "kind":  "response_group",
+        "id":  25,
+        "title":  "Pronunciamientos"
+    },
+    {
+        "kind":  "response_group",
+        "id":  26,
+        "title":  "Ver últimas noticias"
+    },
+    {
+        "kind":  "response_group",
+        "id":  27,
+        "title":  "Página web"
+    },
+    {
+        "kind":  "response_group",
+        "id":  28,
+        "title":  "Números de atención"
+    },
+    {
+        "kind":  "response_group",
+        "id":  29,
+        "title":  "WhatsApp"
+    },
+    {
+        "kind":  "response_group",
+        "id":  30,
+        "title":  "Correos electrónicos"
+    },
+    {
+        "kind":  "response_group",
+        "id":  31,
+        "title":  "Sedes y horarios"
+    }
+]

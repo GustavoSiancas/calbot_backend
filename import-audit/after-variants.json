@@ -1,0 +1,2642 @@
+﻿[
+    {
+        "id":  17,
+        "parent_option_id":  null,
+        "title":  "Trámites y servicios",
+        "description":  null,
+        "sort_order":  0,
+        "has_prompt":  true,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:17.007772Z",
+        "updated_at":  "2026-10-13T14:30:17.007772Z",
+        "prompts":  [
+                        {
+                            "id":  5,
+                            "message":  "¿Qué trámite o servicio necesitas realizar? 😊 Elige una opción para continuar.",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:30:25.482215Z",
+                            "updated_at":  "2026-10-13T14:30:25.482215Z"
+                        },
+                        {
+                            "id":  6,
+                            "message":  "¡Claro! Cuéntame qué trámite buscas y te ayudo a encontrarlo. 👇",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:30:25.798314Z",
+                            "updated_at":  "2026-10-13T14:30:25.798314Z"
+                        },
+                        {
+                            "id":  7,
+                            "message":  "¿En qué trámite o servicio del CAL puedo ayudarte hoy? Selecciona una opción. 📋",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:30:26.099278Z",
+                            "updated_at":  "2026-10-13T14:30:26.099278Z"
+                        },
+                        {
+                            "id":  17,
+                            "message":  "¿Qué gestión necesitas hacer en el CAL? Selecciona un trámite o servicio y te orientaré. 👇",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:33:25.821034Z",
+                            "updated_at":  "2026-10-13T14:33:25.821034Z"
+                        },
+                        {
+                            "id":  18,
+                            "message":  "¿Buscas realizar un trámite? Elige el servicio que necesitas para ver cómo continuar. 😊",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:33:26.174713Z",
+                            "updated_at":  "2026-10-13T14:33:26.174713Z"
+                        }
+                    ],
+        "response_groups":  [
+
+                            ]
+    },
+    {
+        "id":  18,
+        "parent_option_id":  17,
+        "title":  "Pago de incorporación",
+        "description":  null,
+        "sort_order":  0,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:17.347079Z",
+        "updated_at":  "2026-10-13T14:30:17.347079Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+                                {
+                                    "id":  7,
+                                    "menu_option_id":  18,
+                                    "name":  "Pago de incorporación",
+                                    "description":  "Orientación para el pago de incorporación.",
+                                    "weight":  2,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:30:29.258756Z",
+                                    "updated_at":  "2026-10-13T14:30:29.258756Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  12,
+                                                      "type":  "TEXT",
+                                                      "text":  "Para iniciar tu incorporación, revisa el portal oficial y confirma allí los requisitos y el importe vigente antes de pagar.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:30:29.258756Z",
+                                                      "updated_at":  "2026-10-13T14:30:29.258756Z"
+                                                  },
+                                                  {
+                                                      "id":  13,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://incorporacion.cal.org.pe/",
+                                                      "caption":  "Portal de incorporaciones",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:30:29.258756Z",
+                                                      "updated_at":  "2026-10-13T14:30:29.258756Z"
+                                                  }
+                                              ]
+                                },
+                                {
+                                    "id":  8,
+                                    "menu_option_id":  18,
+                                    "name":  "Pago de incorporación — alternativa",
+                                    "description":  "Otra forma de orientar al usuario sobre su incorporación.",
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:31:00.38461Z",
+                                    "updated_at":  "2026-10-13T14:31:00.38461Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  14,
+                                                      "type":  "TEXT",
+                                                      "text":  "¿Vas a incorporarte al CAL? En el portal de incorporaciones encontrarás el proceso. Si necesitas orientación sobre el pago, comunícate con Vicedecanato antes de realizarlo.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:00.38461Z",
+                                                      "updated_at":  "2026-10-13T14:31:00.38461Z"
+                                                  },
+                                                  {
+                                                      "id":  15,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://incorporacion.cal.org.pe/",
+                                                      "caption":  "Ir a incorporaciones",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:00.38461Z",
+                                                      "updated_at":  "2026-10-13T14:31:00.38461Z"
+                                                  },
+                                                  {
+                                                      "id":  16,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/contacto",
+                                                      "caption":  "Datos de contacto del CAL",
+                                                      "metadata":  null,
+                                                      "sort_order":  2,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:00.38461Z",
+                                                      "updated_at":  "2026-10-13T14:31:00.38461Z"
+                                                  }
+                                              ]
+                                },
+                                {
+                                    "id":  32,
+                                    "menu_option_id":  18,
+                                    "name":  "Pago de incorporación - variante conversacional",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:33:28.445496Z",
+                                    "updated_at":  "2026-10-13T14:33:28.445496Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  78,
+                                                      "type":  "TEXT",
+                                                      "text":  "¿Quieres iniciar tu incorporación al CAL? Consulta el portal oficial para conocer los requisitos y confirmar el importe vigente antes de realizar el pago.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:28.445496Z",
+                                                      "updated_at":  "2026-10-13T14:33:28.445496Z"
+                                                  },
+                                                  {
+                                                      "id":  79,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://incorporacion.cal.org.pe/",
+                                                      "caption":  "Portal de incorporaciones",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:28.445496Z",
+                                                      "updated_at":  "2026-10-13T14:33:28.445496Z"
+                                                  }
+                                              ]
+                                }
+                            ]
+    },
+    {
+        "id":  25,
+        "parent_option_id":  24,
+        "title":  "Pago en línea",
+        "description":  null,
+        "sort_order":  0,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:19.58339Z",
+        "updated_at":  "2026-10-13T14:30:19.58339Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+                                {
+                                    "id":  16,
+                                    "menu_option_id":  25,
+                                    "name":  "Pago en línea",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:31:03.168171Z",
+                                    "updated_at":  "2026-10-13T14:31:03.168171Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  32,
+                                                      "type":  "TEXT",
+                                                      "text":  "Este es el acceso oficial al portal de pagos del CAL. Comprueba el concepto y el importe antes de confirmar la operación.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:03.168171Z",
+                                                      "updated_at":  "2026-10-13T14:31:03.168171Z"
+                                                  },
+                                                  {
+                                                      "id":  33,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://pagoenlineacal.org.pe/",
+                                                      "caption":  "Abrir Pago en Línea",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:03.168171Z",
+                                                      "updated_at":  "2026-10-13T14:31:03.168171Z"
+                                                  }
+                                              ]
+                                },
+                                {
+                                    "id":  38,
+                                    "menu_option_id":  25,
+                                    "name":  "Pago en línea - variante conversacional",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:33:30.593301Z",
+                                    "updated_at":  "2026-10-13T14:33:30.593301Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  91,
+                                                      "type":  "TEXT",
+                                                      "text":  "Puedes acceder al portal oficial de pagos del CAL desde este enlace. Antes de confirmar el pago, revisa el concepto y el importe de la operación.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:30.593301Z",
+                                                      "updated_at":  "2026-10-13T14:33:30.593301Z"
+                                                  },
+                                                  {
+                                                      "id":  92,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://pagoenlineacal.org.pe/",
+                                                      "caption":  "Abrir Pago en Línea",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:30.593301Z",
+                                                      "updated_at":  "2026-10-13T14:33:30.593301Z"
+                                                  }
+                                              ]
+                                }
+                            ]
+    },
+    {
+        "id":  30,
+        "parent_option_id":  29,
+        "title":  "Avisos",
+        "description":  null,
+        "sort_order":  0,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:21.466298Z",
+        "updated_at":  "2026-10-13T14:30:21.466298Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+                                {
+                                    "id":  20,
+                                    "menu_option_id":  30,
+                                    "name":  "Avisos",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:31:04.543332Z",
+                                    "updated_at":  "2026-10-13T14:31:04.543332Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  40,
+                                                      "type":  "TEXT",
+                                                      "text":  "Consulta los avisos publicados por el CAL en la sección de publicaciones.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:04.543332Z",
+                                                      "updated_at":  "2026-10-13T14:31:04.543332Z"
+                                                  },
+                                                  {
+                                                      "id":  41,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/publicaciones",
+                                                      "caption":  "Ver publicaciones del CAL",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:04.543332Z",
+                                                      "updated_at":  "2026-10-13T14:31:04.543332Z"
+                                                  },
+                                                  {
+                                                      "id":  42,
+                                                      "type":  "IMAGE",
+                                                      "text":  null,
+                                                      "url":  "https://res.cloudinary.com/ywecnxwp/image/upload/v1790899089/nju2pwthndcewgfafdhj.jpg",
+                                                      "caption":  "Imagen de: Suspensión de actividades por Elecciones Regionales y Municipales 2026",
+                                                      "metadata":  null,
+                                                      "sort_order":  2,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:04.543332Z",
+                                                      "updated_at":  "2026-10-13T14:31:04.543332Z"
+                                                  },
+                                                  {
+                                                      "id":  43,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/publication/suspension-de-actividades-por-elecciones-regionales-y-municipales-2026",
+                                                      "caption":  "Leer esta publicación",
+                                                      "metadata":  null,
+                                                      "sort_order":  3,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:04.543332Z",
+                                                      "updated_at":  "2026-10-13T14:31:04.543332Z"
+                                                  }
+                                              ]
+                                },
+                                {
+                                    "id":  42,
+                                    "menu_option_id":  30,
+                                    "name":  "Avisos - variante conversacional",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:33:31.886019Z",
+                                    "updated_at":  "2026-10-13T14:33:31.886019Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  99,
+                                                      "type":  "TEXT",
+                                                      "text":  "Los avisos del CAL están disponibles en su sección de publicaciones. Puedes revisarlos desde este enlace.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:31.886019Z",
+                                                      "updated_at":  "2026-10-13T14:33:31.886019Z"
+                                                  },
+                                                  {
+                                                      "id":  100,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/publicaciones",
+                                                      "caption":  "Ver publicaciones del CAL",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:31.886019Z",
+                                                      "updated_at":  "2026-10-13T14:33:31.886019Z"
+                                                  },
+                                                  {
+                                                      "id":  101,
+                                                      "type":  "IMAGE",
+                                                      "text":  null,
+                                                      "url":  "https://res.cloudinary.com/ywecnxwp/image/upload/v1790899089/nju2pwthndcewgfafdhj.jpg",
+                                                      "caption":  "Imagen de: Suspensión de actividades por Elecciones Regionales y Municipales 2026",
+                                                      "metadata":  null,
+                                                      "sort_order":  2,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:31.886019Z",
+                                                      "updated_at":  "2026-10-13T14:33:31.886019Z"
+                                                  },
+                                                  {
+                                                      "id":  102,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/publication/suspension-de-actividades-por-elecciones-regionales-y-municipales-2026",
+                                                      "caption":  "Leer esta publicación",
+                                                      "metadata":  null,
+                                                      "sort_order":  3,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:31.886019Z",
+                                                      "updated_at":  "2026-10-13T14:33:31.886019Z"
+                                                  }
+                                              ]
+                                }
+                            ]
+    },
+    {
+        "id":  38,
+        "parent_option_id":  37,
+        "title":  "Página web",
+        "description":  null,
+        "sort_order":  0,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:23.973271Z",
+        "updated_at":  "2026-10-13T14:30:23.973271Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+                                {
+                                    "id":  27,
+                                    "menu_option_id":  38,
+                                    "name":  "Página web",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:31:07.265765Z",
+                                    "updated_at":  "2026-10-13T14:31:07.265765Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  68,
+                                                      "type":  "TEXT",
+                                                      "text":  "Esta es la página oficial del Colegio de Abogados de Lima.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:07.265765Z",
+                                                      "updated_at":  "2026-10-13T14:31:07.265765Z"
+                                                  },
+                                                  {
+                                                      "id":  69,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/",
+                                                      "caption":  "Abrir la web del CAL",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:07.265765Z",
+                                                      "updated_at":  "2026-10-13T14:31:07.265765Z"
+                                                  }
+                                              ]
+                                },
+                                {
+                                    "id":  49,
+                                    "menu_option_id":  38,
+                                    "name":  "Página web - variante conversacional",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:33:34.201891Z",
+                                    "updated_at":  "2026-10-13T14:33:34.201891Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  127,
+                                                      "type":  "TEXT",
+                                                      "text":  "Puedes visitar el sitio oficial del Colegio de Abogados de Lima desde este enlace.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:34.201891Z",
+                                                      "updated_at":  "2026-10-13T14:33:34.201891Z"
+                                                  },
+                                                  {
+                                                      "id":  128,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/",
+                                                      "caption":  "Abrir la web del CAL",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:34.201891Z",
+                                                      "updated_at":  "2026-10-13T14:33:34.201891Z"
+                                                  }
+                                              ]
+                                }
+                            ]
+    },
+    {
+        "id":  19,
+        "parent_option_id":  17,
+        "title":  "Pago del CECAL (Centro de Esparcimiento)",
+        "description":  null,
+        "sort_order":  1,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:17.668816Z",
+        "updated_at":  "2026-10-13T14:30:17.668816Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+                                {
+                                    "id":  9,
+                                    "menu_option_id":  19,
+                                    "name":  "Pago del CECAL (Centro de Esparcimiento)",
+                                    "description":  "Orientación para pagos y reservas del CECAL.",
+                                    "weight":  2,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:31:00.739363Z",
+                                    "updated_at":  "2026-10-13T14:31:00.739363Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  17,
+                                                      "type":  "TEXT",
+                                                      "text":  "Para pagar una visita o reserva del CECAL, consulta primero la disponibilidad, el importe y el medio de pago vigente con el centro. El contacto publicado es 940 472 808.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:00.739363Z",
+                                                      "updated_at":  "2026-10-13T14:31:00.739363Z"
+                                                  },
+                                                  {
+                                                      "id":  18,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/contacto",
+                                                      "caption":  "Contacto y sede CECAL",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:00.739363Z",
+                                                      "updated_at":  "2026-10-13T14:31:00.739363Z"
+                                                  }
+                                              ]
+                                },
+                                {
+                                    "id":  10,
+                                    "menu_option_id":  19,
+                                    "name":  "Pago del CECAL (Centro de Esparcimiento) — alternativa",
+                                    "description":  "Otra orientación para pagos del CECAL.",
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:31:01.090182Z",
+                                    "updated_at":  "2026-10-13T14:31:01.090182Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  19,
+                                                      "type":  "TEXT",
+                                                      "text":  "El CECAL es el Centro de Esparcimiento del CAL. Antes de pagar, confirma tu reserva y las indicaciones actuales de la administración. Puedes consultar por WhatsApp al 940 472 808.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:01.090182Z",
+                                                      "updated_at":  "2026-10-13T14:31:01.090182Z"
+                                                  },
+                                                  {
+                                                      "id":  20,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://legacy.cal.org.pe/v1/economia/",
+                                                      "caption":  "Información del CECAL en el CAL",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:01.090182Z",
+                                                      "updated_at":  "2026-10-13T14:31:01.090182Z"
+                                                  }
+                                              ]
+                                },
+                                {
+                                    "id":  33,
+                                    "menu_option_id":  19,
+                                    "name":  "Pago del CECAL (Centro de Esparcimiento) - variante conversacional",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:33:28.822045Z",
+                                    "updated_at":  "2026-10-13T14:33:28.822045Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  80,
+                                                      "type":  "TEXT",
+                                                      "text":  "¿Planeas una visita o reserva en el CECAL? Antes de pagar, consulta la disponibilidad, el importe y el medio de pago vigente con el centro. El número de contacto publicado es 940 472 808.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:28.822045Z",
+                                                      "updated_at":  "2026-10-13T14:33:28.822045Z"
+                                                  },
+                                                  {
+                                                      "id":  81,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/contacto",
+                                                      "caption":  "Contacto y sede CECAL",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:28.822045Z",
+                                                      "updated_at":  "2026-10-13T14:33:28.822045Z"
+                                                  }
+                                              ]
+                                }
+                            ]
+    },
+    {
+        "id":  24,
+        "parent_option_id":  null,
+        "title":  "Pagos y beneficios",
+        "description":  null,
+        "sort_order":  1,
+        "has_prompt":  true,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:19.251152Z",
+        "updated_at":  "2026-10-13T14:30:19.251152Z",
+        "prompts":  [
+                        {
+                            "id":  8,
+                            "message":  "¿Quieres consultar un pago o conocer tus beneficios? Elige una opción. 💳",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:30:26.459907Z",
+                            "updated_at":  "2026-10-13T14:30:26.459907Z"
+                        },
+                        {
+                            "id":  9,
+                            "message":  "Te ayudo con pagos y beneficios. ¿Qué te gustaría revisar? 😊",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:30:26.760883Z",
+                            "updated_at":  "2026-10-13T14:30:26.760883Z"
+                        },
+                        {
+                            "id":  10,
+                            "message":  "¡Vamos a ello! Selecciona el pago o beneficio que te interesa. ✨",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:30:27.059983Z",
+                            "updated_at":  "2026-10-13T14:30:27.059983Z"
+                        },
+                        {
+                            "id":  19,
+                            "message":  "¿Qué necesitas consultar sobre pagos o beneficios? Selecciona una opción y revisamos los detalles. 💳",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:33:26.486135Z",
+                            "updated_at":  "2026-10-13T14:33:26.486135Z"
+                        },
+                        {
+                            "id":  20,
+                            "message":  "¿Te ayudo con un pago o con tus beneficios como agremiado? Elige una opción para continuar. 👇",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:33:26.801293Z",
+                            "updated_at":  "2026-10-13T14:33:26.801293Z"
+                        }
+                    ],
+        "response_groups":  [
+
+                            ]
+    },
+    {
+        "id":  26,
+        "parent_option_id":  24,
+        "title":  "Consulta de deuda",
+        "description":  null,
+        "sort_order":  1,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:19.877193Z",
+        "updated_at":  "2026-10-13T14:30:19.877193Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+                                {
+                                    "id":  17,
+                                    "menu_option_id":  26,
+                                    "name":  "Consulta de deuda",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:31:03.53624Z",
+                                    "updated_at":  "2026-10-13T14:31:03.53624Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  34,
+                                                      "type":  "TEXT",
+                                                      "text":  "Revisa tus obligaciones pendientes en la consulta de deuda del CAL.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:03.53624Z",
+                                                      "updated_at":  "2026-10-13T14:31:03.53624Z"
+                                                  },
+                                                  {
+                                                      "id":  35,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://servicioscal.org.pe/consulta_deuda/",
+                                                      "caption":  "Consultar deuda",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:03.53624Z",
+                                                      "updated_at":  "2026-10-13T14:31:03.53624Z"
+                                                  }
+                                              ]
+                                },
+                                {
+                                    "id":  39,
+                                    "menu_option_id":  26,
+                                    "name":  "Consulta de deuda - variante conversacional",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:33:30.947198Z",
+                                    "updated_at":  "2026-10-13T14:33:30.947198Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  93,
+                                                      "type":  "TEXT",
+                                                      "text":  "¿Quieres saber si tienes obligaciones pendientes? Consulta tu deuda en el servicio oficial del CAL.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:30.947198Z",
+                                                      "updated_at":  "2026-10-13T14:33:30.947198Z"
+                                                  },
+                                                  {
+                                                      "id":  94,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://servicioscal.org.pe/consulta_deuda/",
+                                                      "caption":  "Consultar deuda",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:30.947198Z",
+                                                      "updated_at":  "2026-10-13T14:33:30.947198Z"
+                                                  }
+                                              ]
+                                }
+                            ]
+    },
+    {
+        "id":  31,
+        "parent_option_id":  29,
+        "title":  "Notas de prensa",
+        "description":  null,
+        "sort_order":  1,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:21.790213Z",
+        "updated_at":  "2026-10-13T14:30:21.790213Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+                                {
+                                    "id":  21,
+                                    "menu_option_id":  31,
+                                    "name":  "Notas de prensa",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:31:05.159544Z",
+                                    "updated_at":  "2026-10-13T14:31:05.159544Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  44,
+                                                      "type":  "TEXT",
+                                                      "text":  "Las notas de prensa reúnen actividades y novedades institucionales. Puedes revisarlas en las publicaciones del CAL.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:05.159544Z",
+                                                      "updated_at":  "2026-10-13T14:31:05.159544Z"
+                                                  },
+                                                  {
+                                                      "id":  45,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/publicaciones",
+                                                      "caption":  "Ver notas de prensa",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:05.159544Z",
+                                                      "updated_at":  "2026-10-13T14:31:05.159544Z"
+                                                  },
+                                                  {
+                                                      "id":  46,
+                                                      "type":  "IMAGE",
+                                                      "text":  null,
+                                                      "url":  "https://res.cloudinary.com/ywecnxwp/image/upload/v1791409179/eqyyopwwsyom1z2nm1zz.jpg",
+                                                      "caption":  "Imagen de: Decana del CAL sostiene que Ley 26300, del Referéndum Ciudadano, debe retornar para un mejor ejercicio de la participación ciudadana",
+                                                      "metadata":  null,
+                                                      "sort_order":  2,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:05.159544Z",
+                                                      "updated_at":  "2026-10-13T14:31:05.159544Z"
+                                                  },
+                                                  {
+                                                      "id":  47,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/publication/decana-del-cal-sostiene-que-ley-26300-del-referendum-ciudadano-debe-retornar-para-un-mejor-ejercicio-de-la-participacion-ciudadana",
+                                                      "caption":  "Leer esta publicación",
+                                                      "metadata":  null,
+                                                      "sort_order":  3,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:05.159544Z",
+                                                      "updated_at":  "2026-10-13T14:31:05.159544Z"
+                                                  }
+                                              ]
+                                },
+                                {
+                                    "id":  43,
+                                    "menu_option_id":  31,
+                                    "name":  "Notas de prensa - variante conversacional",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:33:32.224271Z",
+                                    "updated_at":  "2026-10-13T14:33:32.224271Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  103,
+                                                      "type":  "TEXT",
+                                                      "text":  "¿Buscas novedades y actividades institucionales? Revisa las notas de prensa en la sección de publicaciones del CAL.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:32.224271Z",
+                                                      "updated_at":  "2026-10-13T14:33:32.224271Z"
+                                                  },
+                                                  {
+                                                      "id":  104,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/publicaciones",
+                                                      "caption":  "Ver notas de prensa",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:32.224271Z",
+                                                      "updated_at":  "2026-10-13T14:33:32.224271Z"
+                                                  },
+                                                  {
+                                                      "id":  105,
+                                                      "type":  "IMAGE",
+                                                      "text":  null,
+                                                      "url":  "https://res.cloudinary.com/ywecnxwp/image/upload/v1791409179/eqyyopwwsyom1z2nm1zz.jpg",
+                                                      "caption":  "Imagen de: Decana del CAL sostiene que Ley 26300, del Referéndum Ciudadano, debe retornar para un mejor ejercicio de la participación ciudadana",
+                                                      "metadata":  null,
+                                                      "sort_order":  2,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:32.224271Z",
+                                                      "updated_at":  "2026-10-13T14:33:32.224271Z"
+                                                  },
+                                                  {
+                                                      "id":  106,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/publication/decana-del-cal-sostiene-que-ley-26300-del-referendum-ciudadano-debe-retornar-para-un-mejor-ejercicio-de-la-participacion-ciudadana",
+                                                      "caption":  "Leer esta publicación",
+                                                      "metadata":  null,
+                                                      "sort_order":  3,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:32.224271Z",
+                                                      "updated_at":  "2026-10-13T14:33:32.224271Z"
+                                                  }
+                                              ]
+                                }
+                            ]
+    },
+    {
+        "id":  39,
+        "parent_option_id":  37,
+        "title":  "Números de atención",
+        "description":  null,
+        "sort_order":  1,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:24.262153Z",
+        "updated_at":  "2026-10-13T14:30:24.262153Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+                                {
+                                    "id":  28,
+                                    "menu_option_id":  39,
+                                    "name":  "Números de atención",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:31:07.61212Z",
+                                    "updated_at":  "2026-10-13T14:31:07.61212Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  70,
+                                                      "type":  "TEXT",
+                                                      "text":  "La central telefónica del CAL publica el número (01) 710-6600. En el directorio encontrarás los teléfonos de cada oficina y sede.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:07.61212Z",
+                                                      "updated_at":  "2026-10-13T14:31:07.61212Z"
+                                                  },
+                                                  {
+                                                      "id":  71,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/contacto",
+                                                      "caption":  "Ver directorio telefónico",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:07.61212Z",
+                                                      "updated_at":  "2026-10-13T14:31:07.61212Z"
+                                                  }
+                                              ]
+                                },
+                                {
+                                    "id":  50,
+                                    "menu_option_id":  39,
+                                    "name":  "Números de atención - variante conversacional",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:33:34.504139Z",
+                                    "updated_at":  "2026-10-13T14:33:34.504139Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  129,
+                                                      "type":  "TEXT",
+                                                      "text":  "Puedes comunicarte con la central del CAL al (01) 710-6600. Para ubicar el teléfono de una oficina o sede específica, consulta el directorio oficial.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:34.504139Z",
+                                                      "updated_at":  "2026-10-13T14:33:34.504139Z"
+                                                  },
+                                                  {
+                                                      "id":  130,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/contacto",
+                                                      "caption":  "Ver directorio telefónico",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:34.504139Z",
+                                                      "updated_at":  "2026-10-13T14:33:34.504139Z"
+                                                  }
+                                              ]
+                                }
+                            ]
+    },
+    {
+        "id":  20,
+        "parent_option_id":  17,
+        "title":  "Pago de cuota ordinaria",
+        "description":  null,
+        "sort_order":  2,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:18.009256Z",
+        "updated_at":  "2026-10-13T14:30:18.009256Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+                                {
+                                    "id":  11,
+                                    "menu_option_id":  20,
+                                    "name":  "Pago de cuota ordinaria",
+                                    "description":  "Acceso al pago de cuotas.",
+                                    "weight":  2,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:31:01.441866Z",
+                                    "updated_at":  "2026-10-13T14:31:01.441866Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  21,
+                                                      "type":  "TEXT",
+                                                      "text":  "Puedes revisar tu deuda antes de pagar la cuota ordinaria. El CAL publica el acceso a la consulta y al portal de pago en línea.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:01.441866Z",
+                                                      "updated_at":  "2026-10-13T14:31:01.441866Z"
+                                                  },
+                                                  {
+                                                      "id":  22,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://servicioscal.org.pe/consulta_deuda/",
+                                                      "caption":  "Consultar deuda",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:01.441866Z",
+                                                      "updated_at":  "2026-10-13T14:31:01.441866Z"
+                                                  },
+                                                  {
+                                                      "id":  23,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://pagoenlineacal.org.pe/",
+                                                      "caption":  "Ir a Pago en Línea",
+                                                      "metadata":  null,
+                                                      "sort_order":  2,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:01.441866Z",
+                                                      "updated_at":  "2026-10-13T14:31:01.441866Z"
+                                                  }
+                                              ]
+                                },
+                                {
+                                    "id":  12,
+                                    "menu_option_id":  20,
+                                    "name":  "Pago de cuota ordinaria — alternativa",
+                                    "description":  "Otra guía breve para el pago de cuotas.",
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:31:01.806645Z",
+                                    "updated_at":  "2026-10-13T14:31:01.806645Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  24,
+                                                      "type":  "TEXT",
+                                                      "text":  "Para pagar tu cuota ordinaria, entra al portal oficial de pagos del CAL y verifica el importe que aparece en tu cuenta.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:01.806645Z",
+                                                      "updated_at":  "2026-10-13T14:31:01.806645Z"
+                                                  },
+                                                  {
+                                                      "id":  25,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://pagoenlineacal.org.pe/",
+                                                      "caption":  "Pago en Línea CAL",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:01.806645Z",
+                                                      "updated_at":  "2026-10-13T14:31:01.806645Z"
+                                                  }
+                                              ]
+                                },
+                                {
+                                    "id":  34,
+                                    "menu_option_id":  20,
+                                    "name":  "Pago de cuota ordinaria - variante conversacional",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:33:29.174102Z",
+                                    "updated_at":  "2026-10-13T14:33:29.174102Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  82,
+                                                      "type":  "TEXT",
+                                                      "text":  "Antes de pagar tu cuota ordinaria, puedes consultar si tienes deuda pendiente. Aquí encontrarás los accesos oficiales a la consulta de deuda y al pago en línea del CAL.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:29.174102Z",
+                                                      "updated_at":  "2026-10-13T14:33:29.174102Z"
+                                                  },
+                                                  {
+                                                      "id":  83,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://servicioscal.org.pe/consulta_deuda/",
+                                                      "caption":  "Consultar deuda",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:29.174102Z",
+                                                      "updated_at":  "2026-10-13T14:33:29.174102Z"
+                                                  },
+                                                  {
+                                                      "id":  84,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://pagoenlineacal.org.pe/",
+                                                      "caption":  "Ir a Pago en Línea",
+                                                      "metadata":  null,
+                                                      "sort_order":  2,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:29.174102Z",
+                                                      "updated_at":  "2026-10-13T14:33:29.174102Z"
+                                                  }
+                                              ]
+                                }
+                            ]
+    },
+    {
+        "id":  27,
+        "parent_option_id":  24,
+        "title":  "Club de beneficios",
+        "description":  null,
+        "sort_order":  2,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:20.168364Z",
+        "updated_at":  "2026-10-13T14:30:20.168364Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+                                {
+                                    "id":  18,
+                                    "menu_option_id":  27,
+                                    "name":  "Club de beneficios",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:31:03.857746Z",
+                                    "updated_at":  "2026-10-13T14:31:03.857746Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  36,
+                                                      "type":  "TEXT",
+                                                      "text":  "Conoce los convenios y beneficios disponibles para agremiados en el portal del Club de Beneficios del CAL.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:03.857746Z",
+                                                      "updated_at":  "2026-10-13T14:31:03.857746Z"
+                                                  },
+                                                  {
+                                                      "id":  37,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://beneficios.cal.org.pe/",
+                                                      "caption":  "Ver Club de Beneficios",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:03.857746Z",
+                                                      "updated_at":  "2026-10-13T14:31:03.857746Z"
+                                                  }
+                                              ]
+                                },
+                                {
+                                    "id":  40,
+                                    "menu_option_id":  27,
+                                    "name":  "Club de beneficios - variante conversacional",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:33:31.242649Z",
+                                    "updated_at":  "2026-10-13T14:33:31.242649Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  95,
+                                                      "type":  "TEXT",
+                                                      "text":  "En el Club de Beneficios del CAL puedes revisar los convenios y beneficios disponibles para los agremiados. Accede al portal desde este enlace.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:31.242649Z",
+                                                      "updated_at":  "2026-10-13T14:33:31.242649Z"
+                                                  },
+                                                  {
+                                                      "id":  96,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://beneficios.cal.org.pe/",
+                                                      "caption":  "Ver Club de Beneficios",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:31.242649Z",
+                                                      "updated_at":  "2026-10-13T14:33:31.242649Z"
+                                                  }
+                                              ]
+                                }
+                            ]
+    },
+    {
+        "id":  29,
+        "parent_option_id":  null,
+        "title":  "Noticias",
+        "description":  null,
+        "sort_order":  2,
+        "has_prompt":  true,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:21.055199Z",
+        "updated_at":  "2026-10-13T14:30:21.055199Z",
+        "prompts":  [
+                        {
+                            "id":  11,
+                            "message":  "¿Qué novedades del CAL te gustaría conocer? 📰 Elige una opción.",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:30:27.37995Z",
+                            "updated_at":  "2026-10-13T14:30:27.37995Z"
+                        },
+                        {
+                            "id":  12,
+                            "message":  "Te comparto las novedades del CAL. ¿Qué tema te interesa? 👀",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:30:27.68396Z",
+                            "updated_at":  "2026-10-13T14:30:27.68396Z"
+                        },
+                        {
+                            "id":  13,
+                            "message":  "¿Buscas noticias o comunicados recientes? Selecciona una opción para continuar. 📣",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:30:27.98824Z",
+                            "updated_at":  "2026-10-13T14:30:27.98824Z"
+                        },
+                        {
+                            "id":  21,
+                            "message":  "¿Qué tipo de publicación quieres revisar? Elige una categoría de noticias del CAL. 📰",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:33:27.102754Z",
+                            "updated_at":  "2026-10-13T14:33:27.102754Z"
+                        },
+                        {
+                            "id":  22,
+                            "message":  "¿Sobre qué novedades del CAL quieres informarte? Selecciona una opción para ver más. 😊",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:33:27.40268Z",
+                            "updated_at":  "2026-10-13T14:33:27.40268Z"
+                        }
+                    ],
+        "response_groups":  [
+
+                            ]
+    },
+    {
+        "id":  32,
+        "parent_option_id":  29,
+        "title":  "Comunicados",
+        "description":  null,
+        "sort_order":  2,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:22.076746Z",
+        "updated_at":  "2026-10-13T14:30:22.076746Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+                                {
+                                    "id":  22,
+                                    "menu_option_id":  32,
+                                    "name":  "Comunicados",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:31:05.535844Z",
+                                    "updated_at":  "2026-10-13T14:31:05.535844Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  48,
+                                                      "type":  "TEXT",
+                                                      "text":  "Consulta los comunicados oficiales del CAL en su sección de publicaciones.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:05.535844Z",
+                                                      "updated_at":  "2026-10-13T14:31:05.535844Z"
+                                                  },
+                                                  {
+                                                      "id":  49,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/publicaciones",
+                                                      "caption":  "Ver comunicados",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:05.535844Z",
+                                                      "updated_at":  "2026-10-13T14:31:05.535844Z"
+                                                  },
+                                                  {
+                                                      "id":  50,
+                                                      "type":  "IMAGE",
+                                                      "text":  null,
+                                                      "url":  "https://res.cloudinary.com/ywecnxwp/image/upload/v1790979366/fx9wjwjgrcmwkdupzzdl.jpg",
+                                                      "caption":  "Imagen de: Saludo Institucional por el 33° Aniversario del Ilustre Colegio de Abogados de Ucayali",
+                                                      "metadata":  null,
+                                                      "sort_order":  2,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:05.535844Z",
+                                                      "updated_at":  "2026-10-13T14:31:05.535844Z"
+                                                  },
+                                                  {
+                                                      "id":  51,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/publication/saludo-institucional-por-el-33-aniversario-del-ilustre-colegio-de-abogados-de-ucayali",
+                                                      "caption":  "Leer esta publicación",
+                                                      "metadata":  null,
+                                                      "sort_order":  3,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:05.535844Z",
+                                                      "updated_at":  "2026-10-13T14:31:05.535844Z"
+                                                  }
+                                              ]
+                                },
+                                {
+                                    "id":  44,
+                                    "menu_option_id":  32,
+                                    "name":  "Comunicados - variante conversacional",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:33:32.557318Z",
+                                    "updated_at":  "2026-10-13T14:33:32.557318Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  107,
+                                                      "type":  "TEXT",
+                                                      "text":  "Para revisar los comunicados oficiales del CAL, ingresa a la sección de publicaciones desde este enlace.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:32.557318Z",
+                                                      "updated_at":  "2026-10-13T14:33:32.557318Z"
+                                                  },
+                                                  {
+                                                      "id":  108,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/publicaciones",
+                                                      "caption":  "Ver comunicados",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:32.557318Z",
+                                                      "updated_at":  "2026-10-13T14:33:32.557318Z"
+                                                  },
+                                                  {
+                                                      "id":  109,
+                                                      "type":  "IMAGE",
+                                                      "text":  null,
+                                                      "url":  "https://res.cloudinary.com/ywecnxwp/image/upload/v1790979366/fx9wjwjgrcmwkdupzzdl.jpg",
+                                                      "caption":  "Imagen de: Saludo Institucional por el 33° Aniversario del Ilustre Colegio de Abogados de Ucayali",
+                                                      "metadata":  null,
+                                                      "sort_order":  2,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:32.557318Z",
+                                                      "updated_at":  "2026-10-13T14:33:32.557318Z"
+                                                  },
+                                                  {
+                                                      "id":  110,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/publication/saludo-institucional-por-el-33-aniversario-del-ilustre-colegio-de-abogados-de-ucayali",
+                                                      "caption":  "Leer esta publicación",
+                                                      "metadata":  null,
+                                                      "sort_order":  3,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:32.557318Z",
+                                                      "updated_at":  "2026-10-13T14:33:32.557318Z"
+                                                  }
+                                              ]
+                                }
+                            ]
+    },
+    {
+        "id":  40,
+        "parent_option_id":  37,
+        "title":  "WhatsApp",
+        "description":  null,
+        "sort_order":  2,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:24.556286Z",
+        "updated_at":  "2026-10-13T14:30:24.556286Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+                                {
+                                    "id":  29,
+                                    "menu_option_id":  40,
+                                    "name":  "WhatsApp",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:31:07.956398Z",
+                                    "updated_at":  "2026-10-13T14:31:07.956398Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  72,
+                                                      "type":  "TEXT",
+                                                      "text":  "El directorio del CAL indica el WhatsApp 940 193 788 para la central telefónica. También encontrarás allí los contactos de otras oficinas.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:07.956398Z",
+                                                      "updated_at":  "2026-10-13T14:31:07.956398Z"
+                                                  },
+                                                  {
+                                                      "id":  73,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/contacto",
+                                                      "caption":  "Ver WhatsApp por oficina",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:07.956398Z",
+                                                      "updated_at":  "2026-10-13T14:31:07.956398Z"
+                                                  }
+                                              ]
+                                },
+                                {
+                                    "id":  51,
+                                    "menu_option_id":  40,
+                                    "name":  "WhatsApp - variante conversacional",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:33:34.80332Z",
+                                    "updated_at":  "2026-10-13T14:33:34.80332Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  131,
+                                                      "type":  "TEXT",
+                                                      "text":  "La central telefónica del CAL publica el WhatsApp 940 193 788. Consulta el directorio para encontrar también los contactos de otras oficinas.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:34.80332Z",
+                                                      "updated_at":  "2026-10-13T14:33:34.80332Z"
+                                                  },
+                                                  {
+                                                      "id":  132,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/contacto",
+                                                      "caption":  "Ver WhatsApp por oficina",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:34.80332Z",
+                                                      "updated_at":  "2026-10-13T14:33:34.80332Z"
+                                                  }
+                                              ]
+                                }
+                            ]
+    },
+    {
+        "id":  21,
+        "parent_option_id":  17,
+        "title":  "Consulta de habilidad",
+        "description":  null,
+        "sort_order":  3,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:18.314003Z",
+        "updated_at":  "2026-10-13T14:30:18.314003Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+                                {
+                                    "id":  13,
+                                    "menu_option_id":  21,
+                                    "name":  "Consulta de habilidad",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:31:02.130046Z",
+                                    "updated_at":  "2026-10-13T14:31:02.130046Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  26,
+                                                      "type":  "TEXT",
+                                                      "text":  "Consulta tu condición de habilidad en el servicio oficial del CAL.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:02.130046Z",
+                                                      "updated_at":  "2026-10-13T14:31:02.130046Z"
+                                                  },
+                                                  {
+                                                      "id":  27,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://servicioscal.org.pe/consulta_habilidad/",
+                                                      "caption":  "Consultar habilidad",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:02.130046Z",
+                                                      "updated_at":  "2026-10-13T14:31:02.130046Z"
+                                                  }
+                                              ]
+                                },
+                                {
+                                    "id":  35,
+                                    "menu_option_id":  21,
+                                    "name":  "Consulta de habilidad - variante conversacional",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:33:29.501005Z",
+                                    "updated_at":  "2026-10-13T14:33:29.501005Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  85,
+                                                      "type":  "TEXT",
+                                                      "text":  "¿Necesitas revisar tu habilidad? Abre la consulta oficial del CAL para conocer tu condición.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:29.501005Z",
+                                                      "updated_at":  "2026-10-13T14:33:29.501005Z"
+                                                  },
+                                                  {
+                                                      "id":  86,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://servicioscal.org.pe/consulta_habilidad/",
+                                                      "caption":  "Consultar habilidad",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:29.501005Z",
+                                                      "updated_at":  "2026-10-13T14:33:29.501005Z"
+                                                  }
+                                              ]
+                                }
+                            ]
+    },
+    {
+        "id":  28,
+        "parent_option_id":  24,
+        "title":  "Devolución de pagos errados",
+        "description":  null,
+        "sort_order":  3,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:20.508426Z",
+        "updated_at":  "2026-10-13T14:30:20.508426Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+                                {
+                                    "id":  19,
+                                    "menu_option_id":  28,
+                                    "name":  "Devolución de pagos errados",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:31:04.166271Z",
+                                    "updated_at":  "2026-10-13T14:31:04.166271Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  38,
+                                                      "type":  "TEXT",
+                                                      "text":  "Para solicitar una devolución por pago errado, prepara tu comprobante en PDF o JPG, DNI, registro CAL, teléfono, correo, motivo del reclamo, banco, número de cuenta y CCI de 20 dígitos. Para cambios de boleta o factura, el formulario también solicita RUC y número de factura. Revisa y completa el formulario oficial.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:04.166271Z",
+                                                      "updated_at":  "2026-10-13T14:31:04.166271Z"
+                                                  },
+                                                  {
+                                                      "id":  39,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/devolucion",
+                                                      "caption":  "Consultar devolución de pagos",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:04.166271Z",
+                                                      "updated_at":  "2026-10-13T14:31:04.166271Z"
+                                                  }
+                                              ]
+                                },
+                                {
+                                    "id":  41,
+                                    "menu_option_id":  28,
+                                    "name":  "Devolución de pagos errados - variante conversacional",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:33:31.565839Z",
+                                    "updated_at":  "2026-10-13T14:33:31.565839Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  97,
+                                                      "type":  "TEXT",
+                                                      "text":  "¿Necesitas solicitar una devolución por un pago errado? Ten a mano el comprobante en PDF o JPG, tu DNI, registro CAL, teléfono, correo, motivo del reclamo, banco, número de cuenta y CCI de 20 dígitos. Si solicitas un cambio de boleta o factura, el formulario también pide RUC y número de factura. Consulta y completa el formulario oficial.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:31.565839Z",
+                                                      "updated_at":  "2026-10-13T14:33:31.565839Z"
+                                                  },
+                                                  {
+                                                      "id":  98,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/devolucion",
+                                                      "caption":  "Consultar devolución de pagos",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:31.565839Z",
+                                                      "updated_at":  "2026-10-13T14:33:31.565839Z"
+                                                  }
+                                              ]
+                                }
+                            ]
+    },
+    {
+        "id":  33,
+        "parent_option_id":  29,
+        "title":  "Convocatorias",
+        "description":  null,
+        "sort_order":  3,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:22.364049Z",
+        "updated_at":  "2026-10-13T14:30:22.364049Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+                                {
+                                    "id":  23,
+                                    "menu_option_id":  33,
+                                    "name":  "Convocatorias",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:31:05.865917Z",
+                                    "updated_at":  "2026-10-13T14:31:05.865917Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  52,
+                                                      "type":  "TEXT",
+                                                      "text":  "Revisa las convocatorias del CAL y confirma en cada publicación sus requisitos y fechas.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:05.865917Z",
+                                                      "updated_at":  "2026-10-13T14:31:05.865917Z"
+                                                  },
+                                                  {
+                                                      "id":  53,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/publicaciones",
+                                                      "caption":  "Ver convocatorias",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:05.865917Z",
+                                                      "updated_at":  "2026-10-13T14:31:05.865917Z"
+                                                  },
+                                                  {
+                                                      "id":  54,
+                                                      "type":  "IMAGE",
+                                                      "text":  null,
+                                                      "url":  "https://res.cloudinary.com/ywecnxwp/image/upload/v1790798071/hrpkboni2trjbymlttu8.jpg",
+                                                      "caption":  "Imagen de: MOOC “Rumbo a las Elecciones  Regionales y Municipales 2026” ",
+                                                      "metadata":  null,
+                                                      "sort_order":  2,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:05.865917Z",
+                                                      "updated_at":  "2026-10-13T14:31:05.865917Z"
+                                                  },
+                                                  {
+                                                      "id":  55,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/publication/mooc-rumbo-a-las-elecciones-regionales-y-municipales-2026",
+                                                      "caption":  "Leer esta publicación",
+                                                      "metadata":  null,
+                                                      "sort_order":  3,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:05.865917Z",
+                                                      "updated_at":  "2026-10-13T14:31:05.865917Z"
+                                                  }
+                                              ]
+                                },
+                                {
+                                    "id":  45,
+                                    "menu_option_id":  33,
+                                    "name":  "Convocatorias - variante conversacional",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:33:32.89401Z",
+                                    "updated_at":  "2026-10-13T14:33:32.89401Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  111,
+                                                      "type":  "TEXT",
+                                                      "text":  "Aquí puedes consultar las convocatorias del CAL. Revisa los requisitos y las fechas indicados en cada publicación.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:32.89401Z",
+                                                      "updated_at":  "2026-10-13T14:33:32.89401Z"
+                                                  },
+                                                  {
+                                                      "id":  112,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/publicaciones",
+                                                      "caption":  "Ver convocatorias",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:32.89401Z",
+                                                      "updated_at":  "2026-10-13T14:33:32.89401Z"
+                                                  },
+                                                  {
+                                                      "id":  113,
+                                                      "type":  "IMAGE",
+                                                      "text":  null,
+                                                      "url":  "https://res.cloudinary.com/ywecnxwp/image/upload/v1790798071/hrpkboni2trjbymlttu8.jpg",
+                                                      "caption":  "Imagen de: MOOC “Rumbo a las Elecciones  Regionales y Municipales 2026” ",
+                                                      "metadata":  null,
+                                                      "sort_order":  2,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:32.89401Z",
+                                                      "updated_at":  "2026-10-13T14:33:32.89401Z"
+                                                  },
+                                                  {
+                                                      "id":  114,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/publication/mooc-rumbo-a-las-elecciones-regionales-y-municipales-2026",
+                                                      "caption":  "Leer esta publicación",
+                                                      "metadata":  null,
+                                                      "sort_order":  3,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:32.89401Z",
+                                                      "updated_at":  "2026-10-13T14:33:32.89401Z"
+                                                  }
+                                              ]
+                                }
+                            ]
+    },
+    {
+        "id":  37,
+        "parent_option_id":  null,
+        "title":  "Contacto y sedes",
+        "description":  null,
+        "sort_order":  3,
+        "has_prompt":  true,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:23.644054Z",
+        "updated_at":  "2026-10-13T14:30:23.644054Z",
+        "prompts":  [
+                        {
+                            "id":  14,
+                            "message":  "¿Necesitas comunicarte con el CAL o ubicar una sede? 📍 Elige una opción.",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:30:28.347894Z",
+                            "updated_at":  "2026-10-13T14:30:28.347894Z"
+                        },
+                        {
+                            "id":  15,
+                            "message":  "¡Te ayudo a encontrarnos! ¿Buscas un contacto, una dirección o un horario? 😊",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:30:28.635706Z",
+                            "updated_at":  "2026-10-13T14:30:28.635706Z"
+                        },
+                        {
+                            "id":  16,
+                            "message":  "¿Cómo podemos ayudarte a contactar al CAL? Selecciona una opción para seguir. ☎️",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:30:28.919525Z",
+                            "updated_at":  "2026-10-13T14:30:28.919525Z"
+                        },
+                        {
+                            "id":  23,
+                            "message":  "¿Buscas un teléfono, correo o una sede del CAL? Elige el dato que necesitas. 📍",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:33:27.732662Z",
+                            "updated_at":  "2026-10-13T14:33:27.732662Z"
+                        },
+                        {
+                            "id":  24,
+                            "message":  "¿Cómo te gustaría contactar al CAL? Selecciona una opción para consultar el directorio o las sedes. ☎️",
+                            "weight":  1,
+                            "is_active":  true,
+                            "created_at":  "2026-10-13T14:33:28.058842Z",
+                            "updated_at":  "2026-10-13T14:33:28.058842Z"
+                        }
+                    ],
+        "response_groups":  [
+
+                            ]
+    },
+    {
+        "id":  41,
+        "parent_option_id":  37,
+        "title":  "Correos electrónicos",
+        "description":  null,
+        "sort_order":  3,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:24.865816Z",
+        "updated_at":  "2026-10-13T14:30:24.865816Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+                                {
+                                    "id":  30,
+                                    "menu_option_id":  41,
+                                    "name":  "Correos electrónicos",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:31:08.317731Z",
+                                    "updated_at":  "2026-10-13T14:31:08.317731Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  74,
+                                                      "type":  "TEXT",
+                                                      "text":  "Central: centraltelefonica@colegiodeabogadosdelima.pe\\nIncorporaciones: sec_vicedecanato@colegiodeabogadosdelima.pe\\nHabilitaciones: habilitaciones@colegiodeabogadosdelima.pe\\nPago en línea: pagoenlinea@colegiodeabogadosdelima.pe\\nCECAL: cecal@colegiodeabogadosdelima.pe\\nConsulta el directorio oficial para otras oficinas y posibles actualizaciones.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:08.317731Z",
+                                                      "updated_at":  "2026-10-13T14:31:08.317731Z"
+                                                  },
+                                                  {
+                                                      "id":  75,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/contacto",
+                                                      "caption":  "Ver correos por oficina",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:08.317731Z",
+                                                      "updated_at":  "2026-10-13T14:31:08.317731Z"
+                                                  }
+                                              ]
+                                },
+                                {
+                                    "id":  52,
+                                    "menu_option_id":  41,
+                                    "name":  "Correos electrónicos - variante conversacional",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:33:35.143925Z",
+                                    "updated_at":  "2026-10-13T14:33:35.143925Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  133,
+                                                      "type":  "TEXT",
+                                                      "text":  "Estos son algunos correos del directorio del CAL:\nCentral: centraltelefonica@colegiodeabogadosdelima.pe\nIncorporaciones: sec_vicedecanato@colegiodeabogadosdelima.pe\nHabilitaciones: habilitaciones@colegiodeabogadosdelima.pe\nPago en línea: pagoenlinea@colegiodeabogadosdelima.pe\nCECAL: cecal@colegiodeabogadosdelima.pe\nRevisa el directorio oficial para otras oficinas y posibles actualizaciones.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:35.143925Z",
+                                                      "updated_at":  "2026-10-13T14:33:35.143925Z"
+                                                  },
+                                                  {
+                                                      "id":  134,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/contacto",
+                                                      "caption":  "Ver correos por oficina",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:35.143925Z",
+                                                      "updated_at":  "2026-10-13T14:33:35.143925Z"
+                                                  }
+                                              ]
+                                }
+                            ]
+    },
+    {
+        "id":  22,
+        "parent_option_id":  17,
+        "title":  "Papeleta de habilidad",
+        "description":  null,
+        "sort_order":  4,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:18.633711Z",
+        "updated_at":  "2026-10-13T14:30:18.633711Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+                                {
+                                    "id":  14,
+                                    "menu_option_id":  22,
+                                    "name":  "Papeleta de habilidad",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:31:02.447274Z",
+                                    "updated_at":  "2026-10-13T14:31:02.447274Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  28,
+                                                      "type":  "TEXT",
+                                                      "text":  "Accede al servicio de papeleta de habilidad del CAL para revisar las indicaciones y continuar con tu trámite.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:02.447274Z",
+                                                      "updated_at":  "2026-10-13T14:31:02.447274Z"
+                                                  },
+                                                  {
+                                                      "id":  29,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://servicioscal.org.pe/papeleta/",
+                                                      "caption":  "Papeleta de habilidad",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:02.447274Z",
+                                                      "updated_at":  "2026-10-13T14:31:02.447274Z"
+                                                  }
+                                              ]
+                                },
+                                {
+                                    "id":  36,
+                                    "menu_option_id":  22,
+                                    "name":  "Papeleta de habilidad - variante conversacional",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:33:29.868078Z",
+                                    "updated_at":  "2026-10-13T14:33:29.868078Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  87,
+                                                      "type":  "TEXT",
+                                                      "text":  "Para continuar con tu trámite de papeleta de habilidad, ingresa al servicio oficial del CAL y revisa las indicaciones que aparecen allí.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:29.868078Z",
+                                                      "updated_at":  "2026-10-13T14:33:29.868078Z"
+                                                  },
+                                                  {
+                                                      "id":  88,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://servicioscal.org.pe/papeleta/",
+                                                      "caption":  "Papeleta de habilidad",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:29.868078Z",
+                                                      "updated_at":  "2026-10-13T14:33:29.868078Z"
+                                                  }
+                                              ]
+                                }
+                            ]
+    },
+    {
+        "id":  34,
+        "parent_option_id":  29,
+        "title":  "Formación integral",
+        "description":  null,
+        "sort_order":  4,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:22.685558Z",
+        "updated_at":  "2026-10-13T14:30:22.685558Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+                                {
+                                    "id":  24,
+                                    "menu_option_id":  34,
+                                    "name":  "Formación integral",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:31:06.213608Z",
+                                    "updated_at":  "2026-10-13T14:31:06.213608Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  56,
+                                                      "type":  "TEXT",
+                                                      "text":  "Encuentra publicaciones de formación integral y actividades académicas del CAL.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:06.213608Z",
+                                                      "updated_at":  "2026-10-13T14:31:06.213608Z"
+                                                  },
+                                                  {
+                                                      "id":  57,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/publicaciones",
+                                                      "caption":  "Ver formación integral",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:06.213608Z",
+                                                      "updated_at":  "2026-10-13T14:31:06.213608Z"
+                                                  },
+                                                  {
+                                                      "id":  58,
+                                                      "type":  "IMAGE",
+                                                      "text":  null,
+                                                      "url":  "https://res.cloudinary.com/ywecnxwp/image/upload/v1791385633/zr9ggc46srvkmebtdakh.png",
+                                                      "caption":  "Imagen de: Maestría en Derecho Procesal Penal - Universidad Norbert Wiener",
+                                                      "metadata":  null,
+                                                      "sort_order":  2,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:06.213608Z",
+                                                      "updated_at":  "2026-10-13T14:31:06.213608Z"
+                                                  },
+                                                  {
+                                                      "id":  59,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/publication/maestria-en-derecho-procesal-penal-universidad-norbert-wiener",
+                                                      "caption":  "Leer esta publicación",
+                                                      "metadata":  null,
+                                                      "sort_order":  3,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:06.213608Z",
+                                                      "updated_at":  "2026-10-13T14:31:06.213608Z"
+                                                  }
+                                              ]
+                                },
+                                {
+                                    "id":  46,
+                                    "menu_option_id":  34,
+                                    "name":  "Formación integral - variante conversacional",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:33:33.225378Z",
+                                    "updated_at":  "2026-10-13T14:33:33.225378Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  115,
+                                                      "type":  "TEXT",
+                                                      "text":  "Consulta las actividades académicas y las publicaciones de formación integral del CAL en su sitio oficial.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:33.225378Z",
+                                                      "updated_at":  "2026-10-13T14:33:33.225378Z"
+                                                  },
+                                                  {
+                                                      "id":  116,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/publicaciones",
+                                                      "caption":  "Ver formación integral",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:33.225378Z",
+                                                      "updated_at":  "2026-10-13T14:33:33.225378Z"
+                                                  },
+                                                  {
+                                                      "id":  117,
+                                                      "type":  "IMAGE",
+                                                      "text":  null,
+                                                      "url":  "https://res.cloudinary.com/ywecnxwp/image/upload/v1791385633/zr9ggc46srvkmebtdakh.png",
+                                                      "caption":  "Imagen de: Maestría en Derecho Procesal Penal - Universidad Norbert Wiener",
+                                                      "metadata":  null,
+                                                      "sort_order":  2,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:33.225378Z",
+                                                      "updated_at":  "2026-10-13T14:33:33.225378Z"
+                                                  },
+                                                  {
+                                                      "id":  118,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/publication/maestria-en-derecho-procesal-penal-universidad-norbert-wiener",
+                                                      "caption":  "Leer esta publicación",
+                                                      "metadata":  null,
+                                                      "sort_order":  3,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:33.225378Z",
+                                                      "updated_at":  "2026-10-13T14:33:33.225378Z"
+                                                  }
+                                              ]
+                                }
+                            ]
+    },
+    {
+        "id":  42,
+        "parent_option_id":  37,
+        "title":  "Sedes y horarios",
+        "description":  null,
+        "sort_order":  4,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:25.163536Z",
+        "updated_at":  "2026-10-13T14:30:25.163536Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+                                {
+                                    "id":  31,
+                                    "menu_option_id":  42,
+                                    "name":  "Sedes y horarios",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:31:08.669307Z",
+                                    "updated_at":  "2026-10-13T14:31:08.669307Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  76,
+                                                      "type":  "TEXT",
+                                                      "text":  "Consulta las direcciones y horarios vigentes de Miraflores, Lima Centro, Lima Norte, el Policlínico y CECAL en el directorio del CAL.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:08.669307Z",
+                                                      "updated_at":  "2026-10-13T14:31:08.669307Z"
+                                                  },
+                                                  {
+                                                      "id":  77,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/contacto",
+                                                      "caption":  "Ver sedes y horarios",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:08.669307Z",
+                                                      "updated_at":  "2026-10-13T14:31:08.669307Z"
+                                                  }
+                                              ]
+                                },
+                                {
+                                    "id":  53,
+                                    "menu_option_id":  42,
+                                    "name":  "Sedes y horarios - variante conversacional",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:33:35.504968Z",
+                                    "updated_at":  "2026-10-13T14:33:35.504968Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  135,
+                                                      "type":  "TEXT",
+                                                      "text":  "¿Buscas una sede del CAL? En el directorio oficial encontrarás las direcciones y horarios de Miraflores, Lima Centro, Lima Norte, el Policlínico y CECAL.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:35.504968Z",
+                                                      "updated_at":  "2026-10-13T14:33:35.504968Z"
+                                                  },
+                                                  {
+                                                      "id":  136,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/contacto",
+                                                      "caption":  "Ver sedes y horarios",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:35.504968Z",
+                                                      "updated_at":  "2026-10-13T14:33:35.504968Z"
+                                                  }
+                                              ]
+                                }
+                            ]
+    },
+    {
+        "id":  23,
+        "parent_option_id":  17,
+        "title":  "Mesa de partes virtual",
+        "description":  null,
+        "sort_order":  5,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:18.932853Z",
+        "updated_at":  "2026-10-13T14:30:18.932853Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+                                {
+                                    "id":  15,
+                                    "menu_option_id":  23,
+                                    "name":  "Mesa de partes virtual",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:31:02.790348Z",
+                                    "updated_at":  "2026-10-13T14:31:02.790348Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  30,
+                                                      "type":  "TEXT",
+                                                      "text":  "Puedes presentar hasta 5 documentos en PDF o JPG, de hasta 5 MB cada uno. La plataforma recibe envíos las 24 horas; la atención administrativa indicada es de lunes a viernes de 08:00 a 17:00. Los envíos fuera de horario se registran a las 08:00 del siguiente día hábil. Confirma estas indicaciones en el formulario oficial.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:02.790348Z",
+                                                      "updated_at":  "2026-10-13T14:31:02.790348Z"
+                                                  },
+                                                  {
+                                                      "id":  31,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/mesapartesvirtual",
+                                                      "caption":  "Ir a mesa de partes virtual",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:02.790348Z",
+                                                      "updated_at":  "2026-10-13T14:31:02.790348Z"
+                                                  }
+                                              ]
+                                },
+                                {
+                                    "id":  37,
+                                    "menu_option_id":  23,
+                                    "name":  "Mesa de partes virtual - variante conversacional",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:33:30.189497Z",
+                                    "updated_at":  "2026-10-13T14:33:30.189497Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  89,
+                                                      "type":  "TEXT",
+                                                      "text":  "La Mesa de Partes Virtual permite adjuntar hasta 5 documentos en PDF o JPG, con un máximo de 5 MB por archivo. Recibe envíos las 24 horas; la atención administrativa indicada es de lunes a viernes de 08:00 a 17:00. Fuera de ese horario, los envíos se registran a las 08:00 del siguiente día hábil. Revisa el formulario oficial para confirmar las indicaciones.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:30.189497Z",
+                                                      "updated_at":  "2026-10-13T14:33:30.189497Z"
+                                                  },
+                                                  {
+                                                      "id":  90,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/mesapartesvirtual",
+                                                      "caption":  "Ir a mesa de partes virtual",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:30.189497Z",
+                                                      "updated_at":  "2026-10-13T14:33:30.189497Z"
+                                                  }
+                                              ]
+                                }
+                            ]
+    },
+    {
+        "id":  35,
+        "parent_option_id":  29,
+        "title":  "Pronunciamientos",
+        "description":  null,
+        "sort_order":  5,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:23.037213Z",
+        "updated_at":  "2026-10-13T14:30:23.037213Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+                                {
+                                    "id":  25,
+                                    "menu_option_id":  35,
+                                    "name":  "Pronunciamientos",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:31:06.582174Z",
+                                    "updated_at":  "2026-10-13T14:31:06.582174Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  60,
+                                                      "type":  "TEXT",
+                                                      "text":  "Aquí puedes consultar los pronunciamientos institucionales publicados por el CAL.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:06.582174Z",
+                                                      "updated_at":  "2026-10-13T14:31:06.582174Z"
+                                                  },
+                                                  {
+                                                      "id":  61,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/publicaciones",
+                                                      "caption":  "Ver pronunciamientos",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:06.582174Z",
+                                                      "updated_at":  "2026-10-13T14:31:06.582174Z"
+                                                  },
+                                                  {
+                                                      "id":  62,
+                                                      "type":  "IMAGE",
+                                                      "text":  null,
+                                                      "url":  "https://res.cloudinary.com/ywecnxwp/image/upload/v1790473293/yg0hbnctbrviihmzvrn7.jpg",
+                                                      "caption":  "Imagen de: CAL rechaza el uso indebido del nombre de JUDECAP y exige respeto a la Legalidad Institucional",
+                                                      "metadata":  null,
+                                                      "sort_order":  2,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:06.582174Z",
+                                                      "updated_at":  "2026-10-13T14:31:06.582174Z"
+                                                  },
+                                                  {
+                                                      "id":  63,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/publication/cal-rechaza-el-uso-indebido-del-nombre-de-judecap-y-exige-respeto-a-la-legalidad-institucional",
+                                                      "caption":  "Leer esta publicación",
+                                                      "metadata":  null,
+                                                      "sort_order":  3,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:06.582174Z",
+                                                      "updated_at":  "2026-10-13T14:31:06.582174Z"
+                                                  }
+                                              ]
+                                },
+                                {
+                                    "id":  47,
+                                    "menu_option_id":  35,
+                                    "name":  "Pronunciamientos - variante conversacional",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:33:33.532127Z",
+                                    "updated_at":  "2026-10-13T14:33:33.532127Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  119,
+                                                      "type":  "TEXT",
+                                                      "text":  "Los pronunciamientos institucionales del CAL se pueden revisar en su sección oficial de publicaciones.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:33.532127Z",
+                                                      "updated_at":  "2026-10-13T14:33:33.532127Z"
+                                                  },
+                                                  {
+                                                      "id":  120,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/publicaciones",
+                                                      "caption":  "Ver pronunciamientos",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:33.532127Z",
+                                                      "updated_at":  "2026-10-13T14:33:33.532127Z"
+                                                  },
+                                                  {
+                                                      "id":  121,
+                                                      "type":  "IMAGE",
+                                                      "text":  null,
+                                                      "url":  "https://res.cloudinary.com/ywecnxwp/image/upload/v1790473293/yg0hbnctbrviihmzvrn7.jpg",
+                                                      "caption":  "Imagen de: CAL rechaza el uso indebido del nombre de JUDECAP y exige respeto a la Legalidad Institucional",
+                                                      "metadata":  null,
+                                                      "sort_order":  2,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:33.532127Z",
+                                                      "updated_at":  "2026-10-13T14:33:33.532127Z"
+                                                  },
+                                                  {
+                                                      "id":  122,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/publication/cal-rechaza-el-uso-indebido-del-nombre-de-judecap-y-exige-respeto-a-la-legalidad-institucional",
+                                                      "caption":  "Leer esta publicación",
+                                                      "metadata":  null,
+                                                      "sort_order":  3,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:33.532127Z",
+                                                      "updated_at":  "2026-10-13T14:33:33.532127Z"
+                                                  }
+                                              ]
+                                }
+                            ]
+    },
+    {
+        "id":  36,
+        "parent_option_id":  29,
+        "title":  "Ver últimas noticias",
+        "description":  null,
+        "sort_order":  6,
+        "has_prompt":  false,
+        "is_active":  true,
+        "created_at":  "2026-10-13T14:30:23.350478Z",
+        "updated_at":  "2026-10-13T14:30:23.350478Z",
+        "prompts":  [
+
+                    ],
+        "response_groups":  [
+                                {
+                                    "id":  26,
+                                    "menu_option_id":  36,
+                                    "name":  "Ver últimas noticias",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:31:06.922924Z",
+                                    "updated_at":  "2026-10-13T14:31:06.922924Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  64,
+                                                      "type":  "TEXT",
+                                                      "text":  "Mira las publicaciones más recientes directamente en la web del CAL.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:06.922924Z",
+                                                      "updated_at":  "2026-10-13T14:31:06.922924Z"
+                                                  },
+                                                  {
+                                                      "id":  65,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/publicaciones",
+                                                      "caption":  "Ver últimas noticias",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:06.922924Z",
+                                                      "updated_at":  "2026-10-13T14:31:06.922924Z"
+                                                  },
+                                                  {
+                                                      "id":  66,
+                                                      "type":  "IMAGE",
+                                                      "text":  null,
+                                                      "url":  "https://res.cloudinary.com/ywecnxwp/image/upload/v1791409179/eqyyopwwsyom1z2nm1zz.jpg",
+                                                      "caption":  "Publicación del 2026-10-07: Decana del CAL sostiene que Ley 26300, del Referéndum Ciudadano, debe retornar para un mejor ejercicio de la participación ciudadana",
+                                                      "metadata":  null,
+                                                      "sort_order":  2,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:06.922924Z",
+                                                      "updated_at":  "2026-10-13T14:31:06.922924Z"
+                                                  },
+                                                  {
+                                                      "id":  67,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/publication/decana-del-cal-sostiene-que-ley-26300-del-referendum-ciudadano-debe-retornar-para-un-mejor-ejercicio-de-la-participacion-ciudadana",
+                                                      "caption":  "Leer esta publicación",
+                                                      "metadata":  null,
+                                                      "sort_order":  3,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:31:06.922924Z",
+                                                      "updated_at":  "2026-10-13T14:31:06.922924Z"
+                                                  }
+                                              ]
+                                },
+                                {
+                                    "id":  48,
+                                    "menu_option_id":  36,
+                                    "name":  "Ver últimas noticias - variante conversacional",
+                                    "description":  null,
+                                    "weight":  1,
+                                    "is_active":  true,
+                                    "created_at":  "2026-10-13T14:33:33.864154Z",
+                                    "updated_at":  "2026-10-13T14:33:33.864154Z",
+                                    "items":  [
+                                                  {
+                                                      "id":  123,
+                                                      "type":  "TEXT",
+                                                      "text":  "¿Quieres ver las novedades más recientes? Consulta directamente la sección de publicaciones de la web del CAL.",
+                                                      "url":  null,
+                                                      "caption":  null,
+                                                      "metadata":  null,
+                                                      "sort_order":  0,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:33.864154Z",
+                                                      "updated_at":  "2026-10-13T14:33:33.864154Z"
+                                                  },
+                                                  {
+                                                      "id":  124,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/publicaciones",
+                                                      "caption":  "Ver últimas noticias",
+                                                      "metadata":  null,
+                                                      "sort_order":  1,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:33.864154Z",
+                                                      "updated_at":  "2026-10-13T14:33:33.864154Z"
+                                                  },
+                                                  {
+                                                      "id":  125,
+                                                      "type":  "IMAGE",
+                                                      "text":  null,
+                                                      "url":  "https://res.cloudinary.com/ywecnxwp/image/upload/v1791409179/eqyyopwwsyom1z2nm1zz.jpg",
+                                                      "caption":  "Publicación del 2026-10-07: Decana del CAL sostiene que Ley 26300, del Referéndum Ciudadano, debe retornar para un mejor ejercicio de la participación ciudadana",
+                                                      "metadata":  null,
+                                                      "sort_order":  2,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:33.864154Z",
+                                                      "updated_at":  "2026-10-13T14:33:33.864154Z"
+                                                  },
+                                                  {
+                                                      "id":  126,
+                                                      "type":  "LINK",
+                                                      "text":  null,
+                                                      "url":  "https://www.cal.org.pe/publication/decana-del-cal-sostiene-que-ley-26300-del-referendum-ciudadano-debe-retornar-para-un-mejor-ejercicio-de-la-participacion-ciudadana",
+                                                      "caption":  "Leer esta publicación",
+                                                      "metadata":  null,
+                                                      "sort_order":  3,
+                                                      "is_active":  true,
+                                                      "created_at":  "2026-10-13T14:33:33.864154Z",
+                                                      "updated_at":  "2026-10-13T14:33:33.864154Z"
+                                                  }
+                                              ]
+                                }
+                            ]
+    }
+]
